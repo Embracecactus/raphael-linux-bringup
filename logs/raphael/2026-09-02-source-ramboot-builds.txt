@@ -1,0 +1,64 @@
+Redmi K20 Pro (raphael) source RAM-boot build evidence
+Date: 2026-09-02 Asia/Shanghai
+Purpose: reproducible, ephemeral Linux hardware acceptance image; no phone partition writes
+
+Host
+architecture=x86_64
+cpu=AMD Ryzen 9 9950X 16-Core Processor
+logical_cpus=32
+memory=15 GiB
+swap=4 GiB
+target=arm64/aarch64
+compiler=aarch64-linux-gnu-gcc 11.4.0
+
+Pinned inputs
+kernel_commit=c526b7bf7ebc3fbfee244be252a2c1bd061ca749
+kernel_tree=505b5c0cbd9307ce58f62a8d48150a49217735f6
+builder_commit=128ac1fec88e7a141cebfab4193c6c4cc512a1d1
+builder_tree=ee3e9a20ba8b20b438ff649e4ced707d54611bb1
+builder_patch_sha256=7af97408440be4b57b321eb03f5fbed2d1b96f6108f307a7c9bfc9a8d157bbf7
+base_config_sha256=81a9ef815a22ba6d9b8ffeda99d650662243ea605f802bb5cd910908c2d0d053
+reviewed_init_sha256=119a1a62e72704b88a8e88ba6eb4ddf4f03e082f040069bcd547dc788b14fe9b
+
+Build 1: conservative parallelism
+command=JOBS=12 tools/raphael/build_source_ramboot_linux.sh
+compile_result=PASS: vmlinux, Image, Image.gz and Raphael DTB built
+package_result=PARTIAL: boot image built; script stopped while parsing its boot header
+postprocess_root_cause=the shell read received two od lines through a newline-to-space transform without a terminating record
+postprocess_fix=read the eight boot-header words directly from one od record (-w32 -N32)
+postprocess_fix_syntax_check=PASS
+phone_booted_from_this_build=no
+phone_partition_writes=none
+
+Build 1 output snapshot before clean rebuild
+kernel_config_sha256=81d01f5247e911199f032e339e0e07e8736c67bfbbe98c6ae27512aa2d0fda0f
+initramfs_data_cpio_sha256=c6b2945fe2a801c3d022c3ccbcfc3658b0dbb3f24e25c6f0c663c9b95fe5af06
+Image_sha256=6a3db8f50a2555d49fa4b5aa3a00a3f3b38b25b2ee49a4d7c60a2e68956fcf12
+Image_gz_sha256=171b395796a429248ac6754f043714d6ea8919c2d2d78d81aba1bfa9e2fe252e
+raphael_dtb_sha256=42b194cbb86140f4f0b93ad324b56de9aa72bdcfb14276cb4072726f56657a76
+vmlinux_sha256=04aa4c3c198a55f5fad713a63c696a783515b67d797e92779875eba112d3d037
+System_map_sha256=74daaa72d9cd7c6ef8db4a0f5e848b846b06be76afe908f9d8af790361d68e6a
+Image_gz_dtb_sha256=81efbaa748ece752d8e7f762e424f9433bb02d5defbd6cc8f272f9d2c2b188e5
+boot_img_sha256=97d8a7a39b59f1ca69fd75c3616eaf1fcd8949731fdc256feb49387700e47aeb
+
+Build 1 output sizes (bytes)
+initramfs_data.cpio=1799680
+Image=40061440
+Image.gz=15012055
+sm8150-xiaomi-raphael.dtb=108543
+vmlinux=152504216
+System.map=6547346
+raphael-Image.gz-dtb=15120598
+raphael-source-ramboot.img=15126528
+
+Build 1 Android boot v0 header (little-endian 32-bit values after magic)
+kernel_size=15120598
+kernel_addr=0x80008000
+ramdisk_size=0
+ramdisk_addr=0x81000000
+second_size=0
+second_addr=0x80f00000
+tags_addr=0x80000100
+page_size=4096
+
+Build 2: pending clean rebuild with JOBS=32

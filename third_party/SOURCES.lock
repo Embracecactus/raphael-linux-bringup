@@ -1,0 +1,8 @@
+# name | repository | ref | commit | status as of 2026-09-02
+raphael-linux | https://github.com/Aospa-raphael-unofficial/linux.git | refs/heads/sm8150/7.2.0 | e23773fa94eafcabc04ec6b3dd2c06634d46ce6f | remote-ref-verified
+raphael-rootfs | https://github.com/GavinLiuOnline/xiaomi_raphael_build_rootfs.git | HEAD | 51f9cd0634e09ed70885f91806bf08213211cc2e | shallow-clone-clean;remote-ref-verified
+raphael-image-builder | https://github.com/GengWei1997/linux-xiaomi-raphael-uboot.git | HEAD | 6cf98b674514bd61e0ec3723ac3c227d0e33da3d | shallow-clone-clean;remote-ref-verified
+raphael-uboot | https://github.com/GavinLiuOnline/xiaomi_raphael_uboot.git | refs/heads/mailing | b5e36b80ecf58b00f4f4245cf411d73ed36832d5 | shallow-clone-clean;remote-ref-verified
+raphael-kernel-builder | https://github.com/GavinLiuOnline/xiaomi_raphael_build_kernel.git | refs/tags/kernel-v7.0 | 128ac1fec88e7a141cebfab4193c6c4cc512a1d1 | archive-sha256=606e5b33afa19d234067557758de6f713879a0df9442af9b36ef0bdcb1349c99;tree=ee3e9a20ba8b20b438ff649e4ced707d54611bb1;tree-verified
+raphael-kernel-release-source | https://github.com/GavinLiuOnline/xiaomi_raphael_kernel.git | c526b7bf7ebc3fbfee244be252a2c1bd061ca749 | c526b7bf7ebc3fbfee244be252a2c1bd061ca749 | archive-sha256=d18e0ae1a9a76d467a5daf8c5e7d2265b3edfbddafe3e2752f51dffc852c66ba;tree=505b5c0cbd9307ce58f62a8d48150a49217735f6;tree-verified;matches-published-gc526b7bf7ebc-dirty
+raphael-kernel-current-head | https://github.com/GavinLiuOnline/xiaomi_raphael_kernel.git | refs/heads/raphael-7.0 | a35058bc6508db6091c1563022d59825516a0567 | remote-ref-verified;five-commits-ahead-of-release-source;not-used-for-first-boot

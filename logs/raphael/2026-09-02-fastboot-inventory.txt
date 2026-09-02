@@ -1,0 +1,56 @@
+# Sanitized read-only Fastboot inventory
+# Date: 2026-09-02 Asia/Shanghai
+# Device: Xiaomi Redmi K20 Pro (raphael); unique identifiers omitted
+# Script: tools/raphael/read_fastboot_vars.sh
+# Tool: Google Platform Tools fastboot 37.0.1-15733141
+# Clean archive SHA-256:
+# d230f13842f60f782a8645f9c813f8f845bf36089ea7289f28c48f17979313f1
+
+[product]
+product: raphael
+[unlocked]
+unlocked: yes
+[secure]
+secure: yes
+[anti]
+anti: 1
+[current-slot]
+FAILED (remote: 'GetVar Variable Not found')
+[slot-count]
+FAILED (remote: 'GetVar Variable Not found')
+[is-userspace]
+FAILED (remote: 'GetVar Variable Not found')
+[version-bootloader]
+version-bootloader:
+[version-baseband]
+version-baseband:
+[max-download-size]
+max-download-size: 805306368
+[has-slot:boot]
+FAILED (remote: 'GetVar Variable Not found')
+[has-slot:system]
+FAILED (remote: 'GetVar Variable Not found')
+[partition-type:boot]
+partition-type:boot: raw
+[partition-size:boot]
+partition-size:boot: 0x8000000
+[partition-size:dtbo]
+partition-size:dtbo: 0x2000000
+[partition-size:vbmeta]
+partition-size:vbmeta: 0x20000
+[partition-size:recovery]
+partition-size:recovery: 0x4000000
+[partition-size:cache]
+partition-size:cache: 0x10000000
+[partition-size:vendor]
+partition-size:vendor: 0x60000000
+[partition-size:userdata]
+partition-size:userdata: 0x39947FB000
+[partition-size:cust]
+partition-size:cust: 0x40000000
+[oem device-info]
+Verity mode: true
+Device unlocked: true
+Device critical unlocked: true
+Charger screen enabled: false
+OKAY

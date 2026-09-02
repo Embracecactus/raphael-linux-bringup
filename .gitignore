@@ -1,0 +1,12 @@
+# Large third-party binaries are kept locally and represented by manifests.
+/artifacts/downloads/
+
+# Reproducible local build outputs; inputs and hashes are recorded in docs.
+/artifacts/build/
+
+# Device-bound calibration/NV backups may contain unique identifiers.
+/artifacts/device-private/
+
+# Upstream repositories remain nested checkouts; pin them in SOURCES.lock.
+/third_party/*/
+!/third_party/SOURCES.lock
