@@ -14,7 +14,7 @@ KERNEL_ARCHIVE=${KERNEL_ARCHIVE:-$REPO_ROOT/artifacts/downloads/source/xiaomi_ra
 BUILDER_ARCHIVE=${BUILDER_ARCHIVE:-$REPO_ROOT/artifacts/downloads/source/xiaomi_raphael_build_kernel-128ac1fec88e7a141cebfab4193c6c4cc512a1d1.proxy.tar.gz}
 OUTPUT_DIR=${OUTPUT_DIR:-$REPO_ROOT/artifacts/build/source-ramboot-c526-gcc11}
 TOOLCHAIN=${TOOLCHAIN:-gcc}
-JOBS=${JOBS:-12}
+JOBS=${JOBS:-$(nproc)}
 ALLOW_CLEAN=${ALLOW_CLEAN:-0}
 
 KERNEL_COMMIT=c526b7bf7ebc3fbfee244be252a2c1bd061ca749
@@ -24,6 +24,7 @@ BUILDER_COMMIT=128ac1fec88e7a141cebfab4193c6c4cc512a1d1
 BUILDER_TREE=ee3e9a20ba8b20b438ff649e4ced707d54611bb1
 BUILDER_ARCHIVE_SHA256=606e5b33afa19d234067557758de6f713879a0df9442af9b36ef0bdcb1349c99
 PATCH_SHA256=7af97408440be4b57b321eb03f5fbed2d1b96f6108f307a7c9bfc9a8d157bbf7
+RUNTIME_PATCH_SHA256=eaddf7fd86bfde88d63e0e52b7f8182af10ce8f71d83f958782f258207ea34e3
 BASE_CONFIG_SHA256=81a9ef815a22ba6d9b8ffeda99d650662243ea605f802bb5cd910908c2d0d053
 BUSYBOX_DEB_SHA256=c467c2014f91795a69237339693a64089347f73a96d10613e7285b7433b3965a
 MKBOOTIMG_DEB_SHA256=63a21af69fd622fb1261f9a12375007ca48613830d9a9bf8436721e56886c2c9
@@ -70,8 +71,10 @@ if [ -e "$OUTPUT_DIR" ]; then
 fi
 
 patch_file=$BUILDER_SOURCE/patchs/raphael.patch
+runtime_patch=$REPO_ROOT/patches/raphael-kernel/0001-raphael-runtime-v3-display-usb-policy.patch
 base_config=$BUILDER_SOURCE/raphael.config
 verify_sha256 "$patch_file" "$PATCH_SHA256"
+verify_sha256 "$runtime_patch" "$RUNTIME_PATCH_SHA256"
 verify_sha256 "$base_config" "$BASE_CONFIG_SHA256"
 verify_sha256 "$BUSYBOX_DEB" "$BUSYBOX_DEB_SHA256"
 verify_sha256 "$MKBOOTIMG_DEB" "$MKBOOTIMG_DEB_SHA256"
@@ -110,6 +113,8 @@ rsync -a --delete "$KERNEL_SOURCE/" "$work_source/"
 	cd "$work_source"
 	git apply --check "$patch_file"
 	git apply "$patch_file"
+	git apply --unidiff-zero --check "$runtime_patch"
+	git apply --unidiff-zero "$runtime_patch"
 )
 install -m 0644 "$base_config" "$work_source/arch/arm64/configs/raphael.config"
 
@@ -274,7 +279,8 @@ manifest=$package_dir/manifest.txt
 	printf 'builder_commit=%s\n' "$BUILDER_COMMIT"
 	printf 'builder_tree=%s\n' "$actual_builder_tree"
 	printf 'builder_archive_sha256=%s\n' "$BUILDER_ARCHIVE_SHA256"
-	printf 'patch_sha256=%s\n' "$PATCH_SHA256"
+	printf 'community_patch_sha256=%s\n' "$PATCH_SHA256"
+	printf 'runtime_v3_patch_sha256=%s\n' "$RUNTIME_PATCH_SHA256"
 	printf 'base_config_sha256=%s\n' "$BASE_CONFIG_SHA256"
 	printf 'busybox_deb_sha256=%s\n' "$BUSYBOX_DEB_SHA256"
 	printf 'busybox_binary_sha256=%s\n' "$(sha256sum "$busybox" | awk '{print $1}')"

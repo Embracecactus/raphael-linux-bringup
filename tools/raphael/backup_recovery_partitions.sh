@@ -63,7 +63,9 @@ if [[ -n "${ADB_SERIAL_VALUE}" ]]; then
 fi
 
 adb_run() {
-  "${ADB_BIN}" "${adb_args[@]}" "$@"
+  # Windows adb.exe may otherwise consume the caller's stdin.  In inventory
+  # loops that drains the partition-name stream after its first entry.
+  "${ADB_BIN}" "${adb_args[@]}" "$@" </dev/null
 }
 
 strip_cr() {
@@ -71,10 +73,14 @@ strip_cr() {
 }
 
 adb_state="$(adb_run get-state 2>/dev/null | strip_cr || true)"
-if [[ "${adb_state}" != "device" ]]; then
-  printf 'ERROR: exactly one authorized adb device must be online.\n' >&2
-  exit 1
-fi
+case "${adb_state}" in
+  device|recovery)
+    ;;
+  *)
+    printf 'ERROR: exactly one authorized adb device or recovery must be online.\n' >&2
+    exit 1
+    ;;
+esac
 
 remote_id="$(adb_run shell id 2>/dev/null | strip_cr || true)"
 if [[ "${remote_id}" != uid=0\(* ]]; then

@@ -1,0 +1,10 @@
+# Raphael first persistent Linux write plan; generated 2026-09-03 Asia/Shanghai
+# Tool: Google Platform Tools fastboot 37.0.1-15733141
+# Device baseline: product=raphael; unlocked=yes; max-download-size=805306368
+# Sequence keeps stock boot intact until userdata/cache are complete; rootfs uses fastboot -S 700M.
+# Recovery, vendor, cust, vbmeta, modem and all NV/calibration partitions are out of scope and untouched.
+order	partition	planned_operation	input_path	input_bytes	input_sha256	target_bytes	rollback_reference	rollback_sha256	authorization	execution
+1	userdata	erase_then_flash_sparse	artifacts/build/debian-trixie-server-c526/raphael-userdata-rootfs.img	1138638848	b6f55322aac6edd088a2dcce395c66a6f102da299d2d1a5f52ae537b026e94ac	247304531968	userdata intentionally excluded by user; restore by stock format/reinstall	N/A	AUTHORIZED_2026-09-03	EXECUTED_OK
+2	cache	erase_then_flash_then_twrp_exact_write	artifacts/build/debian-trixie-server-c526/raphael-cache-boot.img	268435456	a8e87b6387f407ef03431baa2ff6edb8f99981a733e2655d8415a3181753d927	268435456	artifacts/build/stock-rom-V12.0.6.0/raphael_images_V12.0.6.0.QFKCNXM_20201209.0000.00_10.0_cn/images/cache.img plus private raw backup	466ed7a12a4349debf364e18da4f38f377cdb3f25ce60f6c875b130aa5dd7e55	AUTHORIZED_2026-09-03	EXECUTED_OK; PHONE_INPUT_AND_RAW_READBACK_SHA256_MATCH
+3	dtbo	erase	N/A	0	N/A	33554432	artifacts/build/stock-rom-V12.0.6.0/raphael_images_V12.0.6.0.QFKCNXM_20201209.0000.00_10.0_cn/images/dtbo.img plus private raw backup	352295b7e0e5e5994cc32ed382e96fed2cd26198b23fa64f1b18bfe85821762e	AUTHORIZED_2026-09-03	EXECUTED_OK
+4	boot	erase_then_flash	artifacts/build/uboot-cache-boot/raphael-uboot-cache.img	630784	41b90496cf53c47e2bfebf20c28f6c62bbcafae07a023488f75b88a32669db42	134217728	artifacts/build/stock-rom-V12.0.6.0/raphael_images_V12.0.6.0.QFKCNXM_20201209.0000.00_10.0_cn/images/boot.img plus private raw backup	85abc140e4a09d052611a0c8ba20cdbaeaa3c07c2971e0c1265c2f76e0015d73	AUTHORIZED_2026-09-03	EXECUTED_OK

@@ -1,0 +1,22 @@
+Raphael LLVM 22 toolchain acquisition evidence
+Date: 2026-09-02 Asia/Shanghai
+
+transport_mirror=https://mirrors.tuna.tsinghua.edu.cn/llvm-apt
+distribution=jammy
+suite=llvm-toolchain-jammy-22
+repository_authentication=apt InRelease signature
+signing_key_source=https://apt.llvm.org/llvm-snapshot.gpg.key
+signing_key_fingerprint=6084F3CF814B57C1CF12EFD515CF4D18AF4F7421
+installed_clang_package=1:22.1.8~++20260613092327+e80beda6e255-1~exp1~20260613092437.81
+installed_lld_package=1:22.1.8~++20260613092327+e80beda6e255-1~exp1~20260613092437.81
+installed_llvm_package=1:22.1.8~++20260613092327+e80beda6e255-1~exp1~20260613092437.81
+installed_compiler=Ubuntu clang version 22.1.8 (++20260613092327+e80beda6e255-1~exp1~20260613092437.81)
+published_kernel_compiler=Ubuntu clang version 22.1.8 (++20260613092238+e80beda6e255-1~exp1~20260613092253.78)
+source_revision_match=e80beda6e255
+package_binary_identity=NO: mirror offers build .81 while published kernel records build .78
+tool_presence=clang-22,ld.lld-22,llvm-ar-22,llvm-nm-22,llvm-objcopy-22,llvm-objdump-22,llvm-readelf-22,llvm-strip-22
+install_result=PASS after explicit same-source/different-package classification
+apt_transaction_new_packages=14
+apt_transaction_upgraded_packages=16
+apt_transaction_removed_packages=0
+apt_transaction_additional_disk_space=388 MB

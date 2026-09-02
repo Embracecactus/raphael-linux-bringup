@@ -1,0 +1,103 @@
+Raphael domestic Debian image build evidence
+Date: 2026-09-03 Asia/Shanghai
+Scope: host build evidence followed by separately authorized hardware correction and validation
+
+Build decision
+host_architecture=x86_64
+target_architecture=arm64
+host_logical_cpus=32
+distribution=Debian 13 trixie
+debian_mirror=https://mirrors.tuna.tsinghua.edu.cn/debian
+security_mirror=https://mirrors.tuna.tsinghua.edu.cn/debian-security
+foreign_arch_execution=QEMU user-mode through binfmt
+
+Pinned inputs
+kernel_source_commit=c526b7bf7ebc3fbfee244be252a2c1bd061ca749
+kernel_release=7.0.0-sm8150-gc526b7bf7ebc-dirty
+kernel_deb_sha256=9f1a0ca50c7e0035c0ec8fea84e46dd9e5b04869e3f3506d7aae83ea9d7f230e
+kernel_builder_tree=ee3e9a20ba8b20b438ff649e4ced707d54611bb1
+uboot_source_commit=b5e36b80ecf58b00f4f4245cf411d73ed36832d5
+
+U-Boot source-build gate
+independent_build_count=2
+boot_image_comparison=IDENTICAL
+resolved_config_comparison=IDENTICAL
+dtb_comparison=IDENTICAL
+default_environment_comparison=IDENTICAL
+boot_source=cache:/EFI/BOOT/BOOTAA64.EFI
+ufs_fat_efi_loader=enabled
+diagnostic_fastboot=enabled
+fastboot_flash_erase=disabled
+fastboot_oem_run=disabled
+usb_mass_storage=disabled
+saveenv=disabled
+uboot_boot_image_bytes=630784
+uboot_boot_image_sha256=41b90496cf53c47e2bfebf20c28f6c62bbcafae07a023488f75b88a32669db42
+
+Rootfs iteration trail
+attempt_1=STOPPED; direct legacy kernel extraction replaced Debian 13 merged-/usr /lib link
+attempt_2=STOPPED; strict kernel payload whitelist detected an unreviewed /usr subtree
+attempt_3=STOPPED; bootstrap, normalized kernel, initramfs and GRUB passed; 4096-byte FAT sectors fell below FAT32 minimum cluster count
+resume_mode=RESUME_FROM_IMAGES=1
+resume_reason=user requested first boot progress without a fourth full package bootstrap
+resume_validation=Debian identity, merged-/usr, SSH policy, kernel, initramfs and AArch64 GRUB staging checked before reuse
+build_mode=resume-images-from-validated-staging
+bootstrap_reused=true
+post_image_staging_note=this run used the earlier recursive host-ownership handoff; generated ext4 ownership is verified, but do not resume this consumed staging again
+clean_full_rebuild_status=DEFERRED_UNTIL_POST_BRINGUP_CLOSURE
+
+Rootfs output gate
+archive_managed_package_count=222
+firmware_payload_deb_sha256=8969647e21d40a6ec53d0e5d3619c3fc1440e2502949baf6a28b24ab5aca22c9
+alsa_payload_deb_sha256=e40cbae0954a3c5e5b3c1251d8bf7e59a2e02eed6c6d44a726023b073f35cca4
+initial_host_cache_image_bytes=268435456
+initial_host_cache_image_sha256=9bdb028a163af26eda6b066df1b5a733873ac70469c8d904632a7cfec59f413a
+userdata_rootfs_bytes=1138638848
+userdata_rootfs_sha256=b6f55322aac6edd088a2dcce395c66a6f102da299d2d1a5f52ae537b026e94ac
+rootfs_uuid=ee8d3593-59b1-480e-a3b6-4fefb17ee7d8
+cache_fat_volume_id=52415048
+grub_efi_sha256=e9c9cddcba30163e0f17faba01eb8dbb8fcd073bb9f2ac6d8d4b8c11e84a3992
+grub_config_sha256=36c7c599917c5271d0f4accdf59716b412f78b0c1001cfb3122975235cecb4bf
+kernel_efi_sha256=f198358691f8c23e8b8bec4b774d132b191d51bf0be9f156d9724eb6b9f3915d
+initramfs_sha256=670c139ffa14107db5599ad45c171527391cb39c6ebdbfd8a5d5ce5a1037451a
+raphael_dtb_sha256=359333ecb9a3efd5ddc61fd2c7397af202651e0df6289b5d37cdebc0227ea95a
+
+Offline verification
+ext4_e2fsck=PASS; clean
+initial_fat32_fsck=PASS_ON_HOST; 512-byte logical sector; rejected by U-Boot/UFS 4096-byte device
+cache_payload_roundtrip=PASS; GRUB EFI, config, kernel, initramfs and DTB byte-identical
+kernel_config=PASS; EFI_STUB, SCSI_UFS_QCOM and EXT4_FS built in
+initramfs=PASS; 824 entries; 28 Raphael firmware entries; 15 generic Qualcomm boot-firmware entries
+ssh_policy=PASS; root login disabled; password and keyboard-interactive login disabled; public-key login enabled
+account_policy=PASS; root and raphael passwords locked
+rootfs_numeric_ownership=PASS; root files and setuid tools owned by 0:0; service and user ownership preserved
+authorized_keys_mode=0600; owner=1000:1000
+sudoers_mode=0440; owner=0:0
+first_boot_host_keys=PASS; no host private keys embedded in image
+qualcomm_services=PASS; rmtfs, pd-mapper and tqftpserv enabled
+usb_bringup=PASS; ACM console plus CDC-NCM 172.16.42.1; ping and key-only SSH verified
+
+Hardware-derived cache correction
+cache_filesystem=FAT16
+cache_logical_sector_bytes=4096
+corrected_base_cache_sha256=9645030c5f86e82ff8150a94004a36ea171c0a526764a6de34fbd7dd327bc595
+corrected_base_result=Linux userspace PASS; display black; USB UDC absent
+runtime_v3_dtb_sha256=c263b1ed0bd7b4e3a477eb317090e30df22f1c3d6b8912f605f2137449165587
+runtime_v3_policy=normal DRM modeset; USB wrapper and core peripheral; USB role switch absent
+final_cache_image_bytes=268435456
+final_cache_image_sha256=a8e87b6387f407ef03431baa2ff6edb8f99981a733e2655d8415a3181753d927
+final_cache_phone_input_sha256=PASS
+final_cache_raw_partition_readback_sha256=PASS
+final_cache_fsck=PASS; FAT16; 4096-byte logical sector
+final_cache_payload_roundtrip=PASS
+display_hardware=PASS; DSI connected; 1080x2340; msmdrmfb; operator photo
+usb_hardware=PASS; 1d6b:0104 ACM/NCM; UDC a600000.usb
+ssh_hardware=PASS; raphael@172.16.42.1 using private key only
+touch_hardware=FAIL; Goodix input node present but IRQ and event counts remained zero
+slpi_hardware=FAIL; repeated firmware crashes; stopped for current boot only
+
+Gate result
+host_artifact_gate=PASS_WITH_VALIDATED_STAGING_REUSE
+clean_rebuild_gate=DEFERRED
+hardware_boot_gate=PASS_WITH_RECORDED_TOUCH_AND_SLPI_GAPS
+phone_partition_writes=EXECUTED_AFTER_EXPLICIT_AUTHORIZATION; exact scope in linux-write-manifest.tsv

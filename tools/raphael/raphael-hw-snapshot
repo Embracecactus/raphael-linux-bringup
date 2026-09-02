@@ -1,0 +1,87 @@
+#!/bin/sh
+# Capture non-secret hardware bring-up state for offline recovery inspection.
+set -u
+umask 022
+
+delay=${RAPHAEL_SNAPSHOT_DELAY:-45}
+sleep "$delay"
+
+output=/var/lib/raphael-bringup/hw-snapshot
+mkdir -p "$output"
+
+{
+	printf 'RAPHAEL_HW_SNAPSHOT\n'
+	date -u '+utc=%Y-%m-%dT%H:%M:%SZ'
+	uname -a
+	printf 'hostname='
+	cat /etc/hostname 2>/dev/null || true
+	printf 'cmdline='
+	cat /proc/cmdline 2>/dev/null || true
+	printf '\n--- UDC ---\n'
+	ls -la /sys/class/udc 2>&1 || true
+	printf '\n--- USB roles ---\n'
+	ls -la /sys/class/usb_role 2>&1 || true
+	printf '\n--- Type-C ---\n'
+	ls -la /sys/class/typec 2>&1 || true
+	printf '\n--- matching platform devices ---\n'
+	for device in /sys/bus/platform/devices/*; do
+		name=${device##*/}
+		case "$name" in
+			*usb*|*a600000*|*a6f8800*|*88e2000*|*typec*)
+				printf '%s driver=' "$name"
+				readlink "$device/driver" 2>/dev/null || printf 'UNBOUND\n'
+				printf '  modalias='
+				cat "$device/modalias" 2>/dev/null || true
+				;;
+		esac
+	done
+	printf '\n--- DWC3 and Type-C drivers ---\n'
+	ls -la /sys/bus/platform/drivers/*dwc3* \
+		/sys/bus/platform/drivers/*typec* 2>&1 || true
+	printf '\n--- DRM and framebuffer ---\n'
+	for status in /sys/class/drm/card*-*/status; do
+		[ -r "$status" ] || continue
+		printf '%s=' "$status"
+		cat "$status"
+	done
+	for value in /sys/class/graphics/fb0/name \
+		/sys/class/graphics/fb0/virtual_size \
+		/sys/class/graphics/fb0/bits_per_pixel; do
+		[ -r "$value" ] || continue
+		printf '%s=' "$value"
+		cat "$value"
+	done
+	for backlight in /sys/class/backlight/*; do
+		[ -d "$backlight" ] || continue
+		printf '%s brightness=' "$backlight"
+		cat "$backlight/brightness" 2>/dev/null || true
+		printf ' max_brightness='
+		cat "$backlight/max_brightness" 2>/dev/null || true
+	done
+	printf '\n--- input devices ---\n'
+	cat /proc/bus/input/devices 2>&1 || true
+	printf '\n--- touchscreen IRQ ---\n'
+	grep -Ei 'goodix|gtx|touch|fts|focal|novatek' /proc/interrupts 2>&1 || true
+	printf '\n--- remote processors ---\n'
+	for remoteproc in /sys/class/remoteproc/remoteproc*; do
+		[ -d "$remoteproc" ] || continue
+		printf '%s name=' "${remoteproc##*/}"
+		cat "$remoteproc/name" 2>/dev/null || true
+		printf ' state='
+		cat "$remoteproc/state" 2>/dev/null || true
+		printf ' recovery='
+		cat "$remoteproc/recovery" 2>/dev/null || true
+	done
+} >"$output/summary.txt"
+
+if [ -r /sys/kernel/debug/devices_deferred ]; then
+	cp /sys/kernel/debug/devices_deferred "$output/devices-deferred.txt"
+else
+	printf 'devices_deferred unavailable\n' >"$output/devices-deferred.txt"
+fi
+
+if [ -r /sys/firmware/fdt ]; then
+	install -m 0644 /sys/firmware/fdt "$output/runtime-fdt.dtb"
+fi
+
+sync
