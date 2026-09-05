@@ -1,0 +1,14 @@
+{
+  "shell_syntax": "PASS",
+  "negative_manifest_gates": [
+    {
+      "case": "source_commit",
+      "result": "REJECTED_AS_EXPECTED"
+    },
+    {
+      "case": "source_content",
+      "result": "REJECTED_AS_EXPECTED"
+    }
+  ],
+  "hardware_operations": "NONE"
+}

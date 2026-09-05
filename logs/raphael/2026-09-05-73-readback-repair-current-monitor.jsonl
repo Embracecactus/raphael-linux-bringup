@@ -1,0 +1,1 @@
+{"time": "2026-09-05 14:05:42", "ssh_return": 0, "release": "7.3.0-rc1-raphael-mainline-dev", "boot_id": "5cc250a6-fb76-49d0-adb8-64192272d1a6", "online": "0-7", "grubenv_and_services": "raphael_next=\nraphael_last=mainline-7.3-consumed\n  UNIT LOAD ACTIVE SUB DESCRIPTION\n\n0 loaded units listed.", "build_ids": ["541475b8c32e49e0c45dd4afbd809352b576424b"], "result": "PASS"}

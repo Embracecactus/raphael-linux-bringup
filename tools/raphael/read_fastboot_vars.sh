@@ -13,6 +13,12 @@ if [ "$#" -ne 1 ] || [ ! -x "$1" ]; then
 fi
 
 raphael_fastboot="$1"
+expected_serial="${EXPECTED_FASTBOOT_SERIAL:?Set EXPECTED_FASTBOOT_SERIAL to the confirmed phone serial}"
+product_output="$("$raphael_fastboot" -s "$expected_serial" getvar product 2>&1)"
+printf '%s\n' "$product_output" | grep -Eq '^product:[[:space:]]*raphael[[:space:]]*$' || {
+  echo 'ERROR: selected Fastboot target is not Raphael' >&2
+  exit 1
+}
 
 for raphael_var in \
   product \
@@ -38,8 +44,8 @@ for raphael_var in \
   partition-size:cust
 do
   printf '[%s]\n' "$raphael_var"
-  "$raphael_fastboot" getvar "$raphael_var" 2>&1 || true
+  "$raphael_fastboot" -s "$expected_serial" getvar "$raphael_var" 2>&1 || true
 done
 
 printf '[oem device-info]\n'
-"$raphael_fastboot" oem device-info 2>&1 || true
+"$raphael_fastboot" -s "$expected_serial" oem device-info 2>&1 || true

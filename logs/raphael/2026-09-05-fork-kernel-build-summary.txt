@@ -1,0 +1,13 @@
+result=PASS
+built_targets=Image.gz,vmlinuz.efi,modules,qcom/sm8150-xiaomi-raphael.dtb
+source_commit=08de36271e6a23f98712a0719614d2d0a60f1556
+upstream_base=4d7d9486c04d917265f64c55bd23b2cc4fe7749c
+kernel_release=7.3.0-rc1-raphael-mainline-dev
+compiler=11.4.0
+config_sha256=e2e4d0f5ec5b2dd724df954b953a8fe5db7bd693a77c16d712fe48fd1b84c886
+vmlinuz_efi_sha256=6df2fb87e46a8992088ef996b5a9565b44d8d3c4016b80840ff3606613c93e57
+dtb_sha256=0dcada461a2b035d3a5799a6ff08a96a3265c931ad99d12a54a7f7f11365c66e
+hardware_boot=NOT_RUN
+raw_log=artifacts/archive/2026-09-05-fork-kernel-build.log.gz
+raw_log_gzip_sha256=391f2141b8d06095d8c87d73b64a5c55fabf65fb1d2805a15873e04d9efdc558
+notes=An intermediate Git suffix '+' mismatch was rejected during packaging; explicit LOCALVERSION= fixed the release. A clock-skew warning occurred in the initial build; later completion and ABI/packaging checks passed.

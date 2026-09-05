@@ -1,0 +1,175 @@
+3891bf1e1a5c14c5565012a9101548e190cc09d2
+total: 0 errors, 0 warnings, 151 lines checked
+
+"[PATCH] regulator: qcom-rpmh: roll back automatic readback for" has no obvious style problems and is ready for submission.
+
+9e2c2bf0a5de4a933b30c37d24353ddc415eeee9
+total: 0 errors, 0 warnings, 7 lines checked
+
+"[PATCH] dt-bindings: arm: qcom: describe Xiaomi Redmi K20 Pro" has no obvious style problems and is ready for submission.
+
+69bf703c05e8839406c7cfc1846e5020cdc9f01e
+WARNING: added, moved or deleted file(s), does MAINTAINERS need updating?
+#32: 
+new file mode 100644
+
+WARNING: DT binding docs and includes should be a separate patch. See: Documentation/devicetree/bindings/submitting-patches.rst
+
+WARNING: please write a help paragraph that fully describes the config symbol with at least 4 lines
+#181: FILE: drivers/power/supply/Kconfig:1175:
++config BATTERY_QCOM_FG
++	tristate "Qualcomm PMIC fuel gauge driver"
++	depends on MFD_SPMI_PMIC
++	help
++	  Say Y here to enable the Qualcomm PMIC Fuel Gauge driver. This
++	  adds support for battery fuel gauging and state of charge of
++	  batteries connected to supported Qualcomm PMIC fuel gauges.
++
+
+WARNING: function definition argument 'int *' should also have an identifier name
+#281: FILE: drivers/power/supply/qcom_fg.c:72:
++	int (*get_capacity)(struct qcom_fg_chip *chip, int *);
+
+WARNING: function definition argument 'int *' should also have an identifier name
+#282: FILE: drivers/power/supply/qcom_fg.c:73:
++	int (*get_temperature)(struct qcom_fg_chip *chip, int *);
+
+WARNING: function definition argument 'int *' should also have an identifier name
+#283: FILE: drivers/power/supply/qcom_fg.c:74:
++	int (*get_current)(struct qcom_fg_chip *chip, int *);
+
+WARNING: function definition argument 'int *' should also have an identifier name
+#284: FILE: drivers/power/supply/qcom_fg.c:75:
++	int (*get_voltage)(struct qcom_fg_chip *chip, int *);
+
+WARNING: function definition argument 'int *' should also have an identifier name
+#285: FILE: drivers/power/supply/qcom_fg.c:76:
++	int (*get_temp_threshold)(struct qcom_fg_chip *chip,
+
+WARNING: function definition argument 'int' should also have an identifier name
+#287: FILE: drivers/power/supply/qcom_fg.c:78:
++	int (*set_temp_threshold)(struct qcom_fg_chip *chip,
+
+WARNING: braces {} are not necessary for single statement blocks
+#715: FILE: drivers/power/supply/qcom_fg.c:506:
++	if (cap[0] != cap[1]) {
++		cap[0] = cap[0] < cap[1] ? cap[0] : cap[1];
++	}
+
+WARNING: else is not generally useful after a break or return
+#1118: FILE: drivers/power/supply/qcom_fg.c:909:
++			break;
++		} else {
+
+WARNING: Prefer "GPL" over "GPL v2" - see commit bf7fbeeae6db ("module: Cure the MODULE_LICENSE "GPL" vs. "GPL v2" bogosity")
+#1595: FILE: drivers/power/supply/qcom_fg.c:1386:
++MODULE_LICENSE("GPL v2");
+
+total: 0 errors, 12 warnings, 2414 lines checked
+
+NOTE: For some of the reported defects, checkpatch may be able to
+      mechanically convert to the typical style using --fix or --fix-inplace.
+
+"[PATCH] power: supply: import Raphael PM8150B development drivers" has style problems, please review.
+
+NOTE: If any of the errors are false positives, please report
+      them to the maintainer, see CHECKPATCH in MAINTAINERS.
+
+b553082cd1437d1adbdc538e2c3a19725ac53f00
+total: 0 errors, 0 warnings, 16 lines checked
+
+"[PATCH] power: supply: qcom_smbx: retain development charge limit" has no obvious style problems and is ready for submission.
+
+870838455f87eb0424d2d2c1ff290dff8c138d5f
+total: 0 errors, 0 warnings, 23 lines checked
+
+"[PATCH] arm64: dts: qcom: describe PM8150 SDAM2 for RTC storage" has no obvious style problems and is ready for submission.
+
+91bfd4d016fda93d421360e57572dd6d7c07cd75
+WARNING: DT binding docs and includes should be a separate patch. See: Documentation/devicetree/bindings/submitting-patches.rst
+
+WARNING: added, moved or deleted file(s), does MAINTAINERS need updating?
+#26: 
+new file mode 100644
+
+WARNING: line length of 106 exceeds 100 columns
+#182: FILE: arch/arm64/boot/dts/qcom/sm8150.dtsi:4399:
++						qcom,protection-domain = "avs/audio", "msm/adsp/audio_pd";
+
+WARNING: line length of 106 exceeds 100 columns
+#188: FILE: arch/arm64/boot/dts/qcom/sm8150.dtsi:4405:
++						qcom,protection-domain = "avs/audio", "msm/adsp/audio_pd";
+
+WARNING: line length of 106 exceeds 100 columns
+#201: FILE: arch/arm64/boot/dts/qcom/sm8150.dtsi:4418:
++						qcom,protection-domain = "avs/audio", "msm/adsp/audio_pd";
+
+WARNING: line length of 106 exceeds 100 columns
+#215: FILE: arch/arm64/boot/dts/qcom/sm8150.dtsi:4432:
++						qcom,protection-domain = "avs/audio", "msm/adsp/audio_pd";
+
+total: 0 errors, 6 warnings, 205 lines checked
+
+NOTE: For some of the reported defects, checkpatch may be able to
+      mechanically convert to the typical style using --fix or --fix-inplace.
+
+"[PATCH] arm64: dts: qcom: retain SM8150 audio development plumbing" has style problems, please review.
+
+NOTE: If any of the errors are false positives, please report
+      them to the maintainer, see CHECKPATCH in MAINTAINERS.
+
+49417a41ff52a25cb60a655100a3f24934695b15
+WARNING: added, moved or deleted file(s), does MAINTAINERS need updating?
+#13: 
+new file mode 100644
+
+total: 0 errors, 1 warnings, 107 lines checked
+
+NOTE: For some of the reported defects, checkpatch may be able to
+      mechanically convert to the typical style using --fix or --fix-inplace.
+
+"[PATCH] dt-bindings: input: describe PM8150B legacy haptics candidate" has style problems, please review.
+
+NOTE: If any of the errors are false positives, please report
+      them to the maintainer, see CHECKPATCH in MAINTAINERS.
+
+3a02b7caa1d8fa270a7bda87b8b56398c2ff5832
+total: 0 errors, 0 warnings, 8 lines checked
+
+"[PATCH] soc: qcom: pd-mapper: retain SM8150 SLPI domain descriptions" has no obvious style problems and is ready for submission.
+
+39243633781f3511c505e68bf4c7b29c512eb3dd
+total: 0 errors, 0 warnings, 8 lines checked
+
+"[PATCH] arm64: dts: qcom: describe shared SM8150 SLPI context bank" has no obvious style problems and is ready for submission.
+
+b6a272386d1f71a2e076e0942b0d42c669a6bfd8
+WARNING: added, moved or deleted file(s), does MAINTAINERS need updating?
+#30: 
+new file mode 100644
+
+total: 0 errors, 1 warnings, 1065 lines checked
+
+NOTE: For some of the reported defects, checkpatch may be able to
+      mechanically convert to the typical style using --fix or --fix-inplace.
+
+"[PATCH] arm64: dts: qcom: add Raphael development board description" has style problems, please review.
+
+NOTE: If any of the errors are false positives, please report
+      them to the maintainer, see CHECKPATCH in MAINTAINERS.
+
+08de36271e6a23f98712a0719614d2d0a60f1556
+WARNING: added, moved or deleted file(s), does MAINTAINERS need updating?
+#17: 
+new file mode 100644
+
+total: 0 errors, 1 warnings, 1134 lines checked
+
+NOTE: For some of the reported defects, checkpatch may be able to
+      mechanically convert to the typical style using --fix or --fix-inplace.
+
+"[PATCH] arm64: defconfig: add reproducible Raphael development config" has style problems, please review.
+
+NOTE: If any of the errors are false positives, please report
+      them to the maintainer, see CHECKPATCH in MAINTAINERS.
+

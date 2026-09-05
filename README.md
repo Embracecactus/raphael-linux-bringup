@@ -1,104 +1,49 @@
-# Redmi K20 Pro native Linux bring-up
+# Raphael Linux bring-up
 
-Suggested GitHub repository name: `raphael-linux-bringup`.
+Redmi K20 Pro（`raphael`）的 Linux 构建和部署工具。
+内核源码与适配提交维护在 [Embracecactus/linux](https://github.com/Embracecactus/linux)
+的 `raphael/dev` 分支；本仓库负责把该源码构建为可核验的启动包。
 
-This workspace records research and hardware evidence for booting a native
-Linux system on a Xiaomi Redmi K20 Pro (`raphael`) and using it as the host for
-the “傻妞” voice assistant.
+## 当前入口
 
-Current milestone: native Debian 13 arm64 reaches multi-user userspace through
-the persistent ABL -> source-built U-Boot -> GRUB -> Linux chain.  UFS rootfs,
-the 1080x2340 DSI console, USB ACM/NCM and key-only SSH have all been verified
-on the phone.  The device-bound NV/calibration and rollback backup gate was
-completed before the authorized `boot`/`cache`/`userdata`/`dtbo` transition.
+```sh
+JOBS=16 bash tools/raphael/build_fork_kernel.sh
+bash tools/raphael/build_fork_boot_bundle.sh
+bash tools/raphael/flash_fastboot_boot_cache.sh preflight
+```
 
-Known open hardware work is recorded rather than hidden: the Goodix GTX8 input
-device binds but produced no touch events, SLPI repeatedly crashes with the
-current firmware/device-tree combination, and the display startup still emits
-SMMU/clock warnings even though the former black screen and `disp_snapshot`
-NULL dereference are gone.
+以上三条命令只构建和校验本地文件。首次准备源码、主机依赖、保留输入
+及部署说明见 [开发工作流](docs/development.md)。
 
-## Connect over USB
+| 路径 | 内容 |
+| --- | --- |
+| `linux/` | 独立内核 checkout，父仓库忽略 |
+| `config/raphael/` | 内核提交号、启动输入哈希 |
+| `tools/raphael/` | 10 个现用构建、打包、部署及采集文件 |
+| `docs/` | 开发说明、RPMh 回归证据、迁移验收 |
+| `logs/raphael/` | 本轮构建验收及关键 A/B/A 记录 |
+| `artifacts/` | 本地构建、恢复材料和历史归档，不进入 Git |
 
-Connect the phone to the host and wait for the USB-NCM adapter to appear.  From
-this repository in WSL, use the private bring-up key:
+## 验证状态
+
+新 fork 基于 `4d7d9486c04d`，内核提交为 `08de36271e6a`。
+内核、模块、Raphael DTB 已完成主机编译；913 个模块 ABI、initramfs 容量、
+FAT 文件回读及 Fastboot 镜像预检通过。此新基底尚未在手机上启动验证。
+
+手机此前运行的是 `940de590b839` 基底加 RPMh 读回回退的 7.3。
+用户确认进入系统后持续运行；此前启动中的两次意外重启尚未查明。
+这次仓库整理没有刷写或重启手机。
+
+- [RPMh 回退与 A/B/A 证据](docs/research/2026-09-05-linux73-rpmh-readback-fix.md)
+- [本轮迁移、清理与验收](docs/research/2026-09-05-fork-migration.md)
+- [确切内核版本](config/raphael/kernel-source.lock.json)
+
+## USB 连接
 
 ```sh
 ssh -i artifacts/device-private/raphael-linux-id_ed25519 raphael@172.16.42.1
 ```
 
-The account is key-only and has passwordless `sudo`; root and password login
-remain disabled.  The private key and raw device evidence are ignored by Git.
-
-## Verified hardware state (2026-09-03)
-
-| Gate | Result |
-| --- | --- |
-| ABL -> pinned source-built U-Boot | PASS |
-| U-Boot UFS/FAT16 -> ARM64 GRUB EFI | PASS |
-| Linux 7.0, 8 CPUs, UFS/ext4 root, Debian multi-user | PASS |
-| DSI/DRM console, 1080x2340, framebuffer and backlight | PASS |
-| USB ACM + CDC-NCM, ping and key-only SSH | PASS |
-| Goodix GTX8 touch events | FAIL / next-stage diagnosis |
-| SLPI stability | FAIL / runtime recovery disabled for this boot only |
-
-The final hardware-tested cache image is FAT16 with 4096-byte logical sectors,
-268,435,456 bytes, SHA-256
-`a8e87b6387f407ef03431baa2ff6edb8f99981a733e2655d8415a3181753d927`.
-Its runtime DTB policy is represented both by a deterministic DTB transformer
-and by a source patch applied after the pinned community kernel patch.
-
-## Evidence index
-
-- [Current Linux support research](docs/research/2026-09-02-raphael-linux-support.md)
-- [Sanitized device and Fastboot baseline](docs/verification/2026-09-02-raphael-device-baseline.md)
-- [Recovery-material acquisition](docs/verification/2026-09-02-recovery-materials.md)
-- [Community build-chain audit](docs/research/2026-09-02-build-chain-audit.md)
-- [Verified source acquisition and provenance](docs/research/2026-09-02-source-acquisition.md)
-- [ABL findings and recovery backup gate](docs/research/2026-09-03-abl-and-recovery-gate.md)
-- [Community prebuilt binary inventory](docs/research/2026-09-02-rootfs-prebuilt-inventory.tsv)
-- [Domestic-mirror rootfs decision](docs/research/2026-09-03-domestic-rootfs-plan.md)
-- [Exact sanitized Fastboot output](logs/raphael/2026-09-02-fastboot-inventory.txt)
-- [Sanitized partition-name inventory](logs/raphael/2026-09-02-partition-name-inventory.txt)
-- [Sanitized recovery boot attempts](logs/raphael/2026-09-02-recovery-boot-attempts.txt)
-- [Ephemeral Linux boot attempts](logs/raphael/2026-09-02-linux-boot-attempts.txt)
-- [Source RAM-boot build evidence](logs/raphael/2026-09-02-source-ramboot-builds.txt)
-- [LLVM 22 toolchain acquisition evidence](logs/raphael/2026-09-02-llvm22-toolchain.txt)
-- [Stock recovery and preservation gate](logs/raphael/2026-09-03-recovery-gate.txt)
-- [Domestic Debian image build evidence](logs/raphael/2026-09-03-domestic-rootfs-build.txt)
-- [Executed Linux partition-write manifest](logs/raphael/2026-09-03-linux-write-manifest.tsv)
-- [Persistent Linux hardware boot evidence](logs/raphael/2026-09-03-persistent-linux-boot.txt)
-- [Reusable read-only Fastboot inventory script](tools/raphael/read_fastboot_vars.sh)
-- [Read-only recovery partition backup script](tools/raphael/backup_recovery_partitions.sh)
-- [RAM-only Linux init](tools/raphael/ramboot-init)
-- [Reproducible RAM-only boot-image builder](tools/raphael/build_ramboot_linux.sh)
-- [Source-kernel RAM-only boot-image builder](tools/raphael/build_source_ramboot_linux.sh)
-- [Authenticated TUNA LLVM 22 installer](tools/raphael/install_llvm22_tuna.sh)
-- [TUNA-backed Debian 13 arm64 image builder](tools/raphael/build_debian_trixie_server.sh)
-- [Hardware-tested runtime DTB transformer](tools/raphael/prepare_runtime_dtb.sh)
-- [Source-level display/USB DT patch](patches/raphael-kernel/0001-raphael-runtime-v3-display-usb-policy.patch)
-- [Offline hardware snapshot helper](tools/raphael/raphael-hw-snapshot)
-- [Pinned cache-boot U-Boot builder](tools/raphael/build_uboot_cache_boot.sh)
-- [Verified GitHub archive importer](tools/raphael/import_verified_github_archive.sh)
-- [Imported Git-tree verifier](tools/raphael/verify_git_tree.sh)
-- [Pinned upstream sources](third_party/SOURCES.lock)
-
-## Safety boundary
-
-- Research and inventory are read-only unless a later record explicitly says
-  otherwise.  The 2026-09-03 manifest records the exact authorized and executed
-  writes to `userdata`, `cache`, `dtbo` and `boot`.
-- Recovery, vendor, cust, vbmeta, modem and NV/calibration partitions were not
-  part of the Linux transition.  TWRP and stock rollback material remain
-  available, and raw device-bound backups stay outside Git.
-- IMEI, MEID, serial numbers, account identifiers and raw unfiltered Android
-  properties must not be committed or copied into reports.
-
-## Repository note
-
-The directory was initialized as a Git repository on 2026-09-02 with default
-branch `main`.  Its configured `origin` is
-`https://github.com/Embracecactus/raphael-linux-bringup.git`.  Large downloads,
-reproducible build outputs, imported upstream trees and device-private backups
-remain ignored; tracked hashes, source locks, scripts and sanitized evidence
-provide the review trail.
+只读状态采集使用 `tools/raphael/collect_linux_acceptance_runtime.sh`。
+Fastboot/ADB 操作须显式指定已确认手机的序列号。私钥、原始设备信息、
+NV/校准备份、旧工作文件归档均保留在本地忽略目录中。

@@ -1,0 +1,37 @@
+{
+  "recovery-7.1.efi": {
+    "source": "artifacts/build/fusion-7.1-f72bd7-reference/arch/arm64/boot/vmlinuz.efi",
+    "sha256": "f222d755b1131f26a5555c6226f7729f3441c1ed8d5e9f73e65cac9d7a9f503f",
+    "bytes": 14492160
+  },
+  "recovery-initramfs-7.1": {
+    "source": "artifacts/build/fastboot-linux-7.1-fusion-reference/initramfs-7.1",
+    "sha256": "d5f237df4bfd198b6db708afb8b2d49306be90a973bf932a073b2f61b36db139",
+    "bytes": 30745851
+  },
+  "control-sm8150-xiaomi-raphael.dtb": {
+    "source": "artifacts/build/fastboot-linux-7.0-c526-baseline/sm8150-xiaomi-raphael.dtb",
+    "sha256": "11a69f06a39c0096cf19fec43ba0739bce547f934ec6a834988293918d7ea211",
+    "bytes": 108526
+  },
+  "raphael-uboot-cache.img": {
+    "source": "artifacts/build/uboot-cache-boot/raphael-uboot-cache.img",
+    "sha256": "41b90496cf53c47e2bfebf20c28f6c62bbcafae07a023488f75b88a32669db42",
+    "bytes": 630784
+  },
+  "BOOTAA64.EFI": {
+    "source": "artifacts/build/debian-trixie-server-c526/boot-staging/BOOTAA64.EFI",
+    "sha256": "e9c9cddcba30163e0f17faba01eb8dbb8fcd073bb9f2ac6d8d4b8c11e84a3992",
+    "bytes": 3551232
+  },
+  "validated-7.3.config": {
+    "source": "artifacts/build/upstream-7.3-rpmh-readback-repair/.config",
+    "sha256": "cf66624bb856ef5f70577f414ee9df3314f5fbf6cc16d6a75805c6b25fc64c5e",
+    "bytes": 254600
+  },
+  "reference-7.1.config": {
+    "source": "artifacts/build/fusion-7.1-f72bd7-reference/.config",
+    "sha256": "9ca7452e5535aae44e8f314bdf954d05fa2fea62c8b94c8dadc6fe5681c9a5f3",
+    "bytes": 251951
+  }
+}

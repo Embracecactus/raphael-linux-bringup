@@ -1,0 +1,132 @@
+diff --git a/drivers/of/property.c b/drivers/of/property.c
+--- a/drivers/of/property.c
++++ b/drivers/of/property.c
+@@ -1535,7 +1535,7 @@
+ 	if (index > 0 || strcmp(prop_name, "remote-endpoint"))
+ 		return NULL;
+ 
+-	return of_graph_get_remote_port_parent(np);
++	return of_graph_get_remote_port(np);
+ }
+ 
+ static const struct supplier_bindings of_supplier_bindings[] = {
+diff --git a/drivers/regulator/qcom-rpmh-regulator.c b/drivers/regulator/qcom-rpmh-regulator.c
+--- a/drivers/regulator/qcom-rpmh-regulator.c
++++ b/drivers/regulator/qcom-rpmh-regulator.c
+@@ -68,7 +68,6 @@
+ #define RPMH_REGULATOR_ENABLE_MASK		BIT(0)
+ 
+ #define RPMH_REGULATOR_REG_VRM_MODE		0x8
+-#define RPMH_REGULATOR_MODE_MASK		GENMASK(2, 0)
+ 
+ #define PMIC4_LDO_MODE_RETENTION		4
+ #define PMIC4_LDO_MODE_LPM			5
+@@ -367,22 +366,6 @@
+ 	return ret;
+ }
+ 
+-static int rpmh_regulator_vrm_get_pmic_mode(struct rpmh_vreg *vreg, int *pmic_mode)
+-{
+-	struct tcs_cmd cmd = {
+-		.addr = vreg->addr + RPMH_REGULATOR_REG_VRM_MODE,
+-	};
+-	int ret;
+-
+-	ret = rpmh_read(vreg->dev, &cmd);
+-	if (!ret)
+-		*pmic_mode = cmd.data & RPMH_REGULATOR_MODE_MASK;
+-	else
+-		return -EINVAL;
+-
+-	return 0;
+-}
+-
+ static unsigned int rpmh_regulator_vrm_get_mode(struct regulator_dev *rdev)
+ {
+ 	struct rpmh_vreg *vreg = rdev_get_drvdata(rdev);
+@@ -587,73 +570,6 @@
+ 	return 0;
+ }
+ 
+-static int rpmh_regulator_determine_initial_mode(struct rpmh_vreg *vreg)
+-{
+-	struct tcs_cmd cmd = {
+-		.addr = vreg->addr + RPMH_REGULATOR_REG_ENABLE,
+-	};
+-	int ret, pmic_mode, mode;
+-	int sts;
+-
+-	ret = rpmh_read(vreg->dev, &cmd);
+-	if (ret) {
+-		dev_err(vreg->dev, "failed to read ENABLE status ret = %d\n", ret);
+-
+-		return ret;
+-	}
+-
+-	sts = cmd.data & RPMH_REGULATOR_ENABLE_MASK;
+-	if (!sts)
+-		return 0;
+-
+-	if (vreg->hw_data->regulator_type == XOB)
+-		return 0;
+-
+-	ret = rpmh_regulator_vrm_get_pmic_mode(vreg, &pmic_mode);
+-	if (ret < 0) {
+-		vreg->mode = REGULATOR_MODE_INVALID;
+-		dev_err(vreg->dev, "failed to read pmic_mode ret = %d\n", ret);
+-
+-		return ret;
+-	}
+-
+-	/*
+-	 * NOTE: Since BOB4 BYPASS_MODE value = 0 we cannot confirm if that BOB
+-	 * regulator has been sent into bypass mode by bootloader or if bootloader
+-	 * just has not requested for any mode voting. Due this limitation, we
+-	 * must check if the read pmic_mode value is non-zero before comparing it
+-	 * to bypass mode value. This also is needed to avoid setting BYPASS status
+-	 * for LDOs which dont support bypass mode, and have the pmic_bypass_mode
+-	 * uninitialized value as zero in the vreg hw data. For such cases assume
+-	 * lowest mode, if pmic_mode is zero, to allow for mode voting.
+-	 */
+-	if (!pmic_mode) {
+-		for (mode = REGULATOR_MODE_STANDBY; mode > REGULATOR_MODE_INVALID; mode >>= 1) {
+-			if (vreg->hw_data->pmic_mode_map[mode] >= 0) {
+-				vreg->mode = mode;
+-				break;
+-			}
+-		}
+-
+-		return 0;
+-	}
+-
+-	if (vreg->hw_data->pmic_bypass_mode == pmic_mode) {
+-		vreg->bypassed = true;
+-
+-		return 0;
+-	}
+-
+-	for (mode = REGULATOR_MODE_STANDBY; mode > REGULATOR_MODE_INVALID; mode >>= 1) {
+-		if (pmic_mode == vreg->hw_data->pmic_mode_map[mode]) {
+-			vreg->mode = mode;
+-			break;
+-		}
+-	}
+-
+-	return 0;
+-}
+-
+ static const int pmic_mode_map_pmic4_ldo[REGULATOR_MODE_STANDBY + 1] = {
+ 	[REGULATOR_MODE_INVALID] = -EINVAL,
+ 	[REGULATOR_MODE_STANDBY] = PMIC4_LDO_MODE_RETENTION,
+@@ -1958,11 +1874,6 @@
+ 		if (ret < 0)
+ 			return ret;
+ 
+-		ret = rpmh_regulator_determine_initial_mode(vreg);
+-		if (ret < 0)
+-			dev_err(dev, "failed to read initial mode for %s\n",
+-					vreg->rdesc.name);
+-
+ 	}
+ 
+ 	return 0;

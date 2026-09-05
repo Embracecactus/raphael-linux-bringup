@@ -1,0 +1,10 @@
+{"time": "2026-09-05 14:16:14", "ssh_return": 255, "error": "ssh: connect to host 172.16.42.1 port 22: Connection timed out"}
+{"time": "2026-09-05 14:16:21", "ssh_return": 255, "error": "ssh: connect to host 172.16.42.1 port 22: Connection timed out"}
+{"time": "2026-09-05 14:16:27", "ssh_return": 255, "error": "ssh: connect to host 172.16.42.1 port 22: Connection timed out"}
+{"time": "2026-09-05 14:16:33", "ssh_return": 255, "error": "ssh: connect to host 172.16.42.1 port 22: Connection timed out"}
+{"time": "2026-09-05 14:16:39", "ssh_return": 255, "error": "ssh: connect to host 172.16.42.1 port 22: Connection timed out"}
+{"time": "2026-09-05 14:16:43", "ssh_return": 255, "error": "ssh: connect to host 172.16.42.1 port 22: Connection timed out"}
+{"time": "2026-09-05 14:16:49", "ssh_return": 255, "error": "ssh: connect to host 172.16.42.1 port 22: Connection timed out"}
+{"time": "2026-09-05 14:16:55", "ssh_return": 255, "error": "ssh: connect to host 172.16.42.1 port 22: Connection timed out"}
+{"time": "2026-09-05 14:17:01", "ssh_return": 255, "error": "ssh: connect to host 172.16.42.1 port 22: Connection timed out"}
+{"time": "2026-09-05 14:17:07", "ssh_return": 0, "release": "7.3.0-rc1-raphael-mainline-dev", "boot_id": "a964be5d-bca5-4d2d-af1f-9f4be599befb", "online": "0-7", "grubenv_and_services": "raphael_next=\nraphael_last=mainline-7.3-consumed\n  UNIT LOAD ACTIVE SUB DESCRIPTION\n\n0 loaded units listed.", "build_ids": ["541475b8c32e49e0c45dd4afbd809352b576424b"], "result": "PASS"}

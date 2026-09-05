@@ -57,10 +57,11 @@ if ! command -v "${ADB_BIN}" >/dev/null 2>&1 && [[ ! -x "${ADB_BIN}" ]]; then
   exit 1
 fi
 
-adb_args=()
-if [[ -n "${ADB_SERIAL_VALUE}" ]]; then
-  adb_args=(-s "${ADB_SERIAL_VALUE}")
-fi
+[[ -n "${ADB_SERIAL_VALUE}" ]] || {
+  printf 'ERROR: set ADB_SERIAL to the confirmed phone serial.\n' >&2
+  exit 1
+}
+adb_args=(-s "${ADB_SERIAL_VALUE}")
 
 adb_run() {
   # Windows adb.exe may otherwise consume the caller's stdin.  In inventory

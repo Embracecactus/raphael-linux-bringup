@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/Embracecactus/linux.git",
+  "branch": "raphael/dev",
+  "commit": "08de36271e6a23f98712a0719614d2d0a60f1556",
+  "upstream_repository": "https://github.com/torvalds/linux.git",
+  "upstream_commit": "4d7d9486c04d917265f64c55bd23b2cc4fe7749c",
+  "kernel_release": "7.3.0-rc1-raphael-mainline-dev",
+  "hardware_validation": "NOT_RUN_ON_THIS_REBASE"
+}

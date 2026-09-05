@@ -1,0 +1,79 @@
+[
+  {
+    "commit": "3891bf1e1a5c14c5565012a9101548e190cc09d2",
+    "exit_code": 0,
+    "summary": [
+      "total: 0 errors, 0 warnings, 151 lines checked"
+    ]
+  },
+  {
+    "commit": "9e2c2bf0a5de4a933b30c37d24353ddc415eeee9",
+    "exit_code": 0,
+    "summary": [
+      "total: 0 errors, 0 warnings, 7 lines checked"
+    ]
+  },
+  {
+    "commit": "69bf703c05e8839406c7cfc1846e5020cdc9f01e",
+    "exit_code": 1,
+    "summary": [
+      "total: 0 errors, 12 warnings, 2414 lines checked"
+    ]
+  },
+  {
+    "commit": "b553082cd1437d1adbdc538e2c3a19725ac53f00",
+    "exit_code": 0,
+    "summary": [
+      "total: 0 errors, 0 warnings, 16 lines checked"
+    ]
+  },
+  {
+    "commit": "870838455f87eb0424d2d2c1ff290dff8c138d5f",
+    "exit_code": 0,
+    "summary": [
+      "total: 0 errors, 0 warnings, 23 lines checked"
+    ]
+  },
+  {
+    "commit": "91bfd4d016fda93d421360e57572dd6d7c07cd75",
+    "exit_code": 1,
+    "summary": [
+      "total: 0 errors, 6 warnings, 205 lines checked"
+    ]
+  },
+  {
+    "commit": "49417a41ff52a25cb60a655100a3f24934695b15",
+    "exit_code": 1,
+    "summary": [
+      "total: 0 errors, 1 warnings, 107 lines checked"
+    ]
+  },
+  {
+    "commit": "3a02b7caa1d8fa270a7bda87b8b56398c2ff5832",
+    "exit_code": 0,
+    "summary": [
+      "total: 0 errors, 0 warnings, 8 lines checked"
+    ]
+  },
+  {
+    "commit": "39243633781f3511c505e68bf4c7b29c512eb3dd",
+    "exit_code": 0,
+    "summary": [
+      "total: 0 errors, 0 warnings, 8 lines checked"
+    ]
+  },
+  {
+    "commit": "b6a272386d1f71a2e076e0942b0d42c669a6bfd8",
+    "exit_code": 1,
+    "summary": [
+      "total: 0 errors, 1 warnings, 1065 lines checked"
+    ]
+  },
+  {
+    "commit": "08de36271e6a23f98712a0719614d2d0a60f1556",
+    "exit_code": 1,
+    "summary": [
+      "total: 0 errors, 1 warnings, 1134 lines checked"
+    ]
+  }
+]

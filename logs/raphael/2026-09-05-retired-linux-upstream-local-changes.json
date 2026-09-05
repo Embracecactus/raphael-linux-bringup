@@ -1,0 +1,10 @@
+{
+  "drivers/of/property.c": {
+    "baseline_sha256": "60df87ac381220fc6b091bf470cb5e9d824dd87d958c5d3c47a08b92dfe929d3",
+    "retired_modified_sha256": "5ed98e8914eaf705df4df962078d8617b64faccc4eae5c6fd832781a6235b1a7"
+  },
+  "drivers/regulator/qcom-rpmh-regulator.c": {
+    "baseline_sha256": "68260bbc7b42630d7f59104e3ae2126a1689635b01be9e282cbf836fcdcf7949",
+    "retired_modified_sha256": "d111e11f368a240a9343c818ef3e5ab9ee2be329e2cd59a8c8705e5416d3df7d"
+  }
+}
