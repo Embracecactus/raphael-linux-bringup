@@ -1,0 +1,85 @@
+{
+  "date": "2026-09-05",
+  "status": "XFCE_DISPLAY_PASS_GTX8_BOUND_PHYSICAL_TOUCH_AND_NEW_BOOT_PENDING",
+  "source_commit": "ebadafc3e01cb8940509e93dfe670e07bd2e13ca",
+  "source_published": false,
+  "kernel_release": "7.3.0-rc1-raphael-mainline-dev",
+  "running_base_commit": "08de36271e6a23f98712a0719614d2d0a60f1556",
+  "running_build_id": "3a76eddf6eab35445aa5c7d382d8963018497898",
+  "next_boot_build_id": "223bccaf12ca6e9bf8ccadefa3ee8d2cd1136cda",
+  "desktop": {
+    "physical_display_user_confirmed": true,
+    "xfce": "4.20.1",
+    "xorg": "21.1.16",
+    "mesa": "25.0.7",
+    "renderer": "FD640",
+    "direct_rendering": true,
+    "accelerated": true,
+    "output": "DSI-1",
+    "mode": "1080x2340@60",
+    "permanent_autologin": false,
+    "new_packages": 260,
+    "apt_cache_after_clean": "24K",
+    "apt_cache_cleanup_evidence": "artifacts/device-private/20260905-desktop/desktop-boot-transition.txt (after final-runtime-health.txt)"
+  },
+  "touch": {
+    "compatible": "goodix,gt9886",
+    "i2c_device": "1-005d",
+    "before_driver": null,
+    "after_driver": "goodix-gtx8",
+    "device_name": "Goodix GTX8 Capacitive TouchScreen",
+    "event_node_at_test": "/dev/input/event3",
+    "udev_touchscreen": true,
+    "xorg_driver": "libinput",
+    "live_test_module_sha256": "374acab0fe1c2796fd68f9819b49006096416bb91a4983253027c20b2f841a32",
+    "tainted_after_external_load": 4096,
+    "event_window_seconds": 55,
+    "events": {
+      "axis_ranges": {},
+      "counts": {},
+      "frames": 0,
+      "tracking_ends": 0,
+      "tracking_starts": 0
+    },
+    "physical_acceptance": "PENDING_USER_INPUT",
+    "suspend_resume": "NOT_TESTED"
+  },
+  "build": {
+    "result": "PASS",
+    "modules": 914,
+    "module_bytes": 45535232,
+    "built_dtb_sha256": "97e5dc2bb8adeec968b73a569731728962b8cc383eca90d6b0905f9723c87238",
+    "control_dtb_sha256": "11a69f06a39c0096cf19fec43ba0739bce547f934ec6a834988293918d7ea211",
+    "candidate_dtb_hardware_test": "NOT_RUN",
+    "dt_schema": "NOT_RUN_TOOL_UNAVAILABLE",
+    "checkpatch_c_and_h": "0 errors, 0 warnings",
+    "checkpatch_commit_scope": "DCO and patch-submission warnings remain; development port only"
+  },
+  "deployment": {
+    "method": "NCM_SSH_FILESYSTEM_UPDATE",
+    "next_boot_directory": "/boot/raphael-ebadafc3",
+    "kernel_sha256": "9a4ecd3d9bbd6d50f3e8e743303c17bbb0f6c16699bec827b0a8705a58399071",
+    "initramfs_sha256": "a53ca2c17fe4b3f2d3519485c05da03efada4d02d660cdc5b42882834679c0af",
+    "grub_sha256": "cab50c728c338b90d39e4c177d742c89a830190f19faf996546c1bd50d8e6f53",
+    "readback": "PASS",
+    "boot_mount_after": "ro",
+    "backup_directory": "/var/backups/raphael/boot-before-gtx8-20260905",
+    "reboot_executed": false,
+    "new_kernel_boot": "NOT_RUN",
+    "full_fastboot_flash_this_step": false
+  },
+  "package": {
+    "preflight": "PASS",
+    "cache_sha256": "60eec39fa73763053a1e9d707b3fc5ae14c40217ba5b553282260ba0e4e45f4f",
+    "boot_sha256": "03de919577ce8996d7309d2675f682b21b07bad3349b3f249990a030568439ed",
+    "entire_package_flashed": false
+  },
+  "desktop_poweroffs": {
+    "count": 2,
+    "trigger": "systemd-logind: Power key pressed short. -> Powering off...",
+    "before_touch_module_load": true,
+    "implication": "explains these two desktop poweroffs only; earlier boot regressions remain separate"
+  },
+  "serial_port_operations": false,
+  "evidence_directory": "artifacts/device-private/20260905-desktop/"
+}

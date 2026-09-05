@@ -26,7 +26,7 @@ bash tools/raphael/flash_fastboot_boot_cache.sh preflight
 
 ## 验证状态
 
-新 fork 基于 `4d7d9486c04d`，内核提交为 `08de36271e6a`。
+新 fork 基于 `4d7d9486c04d`，首次刷写与下述启动验证对应 `08de36271e6a`。
 内核、模块、Raphael DTB 已完成主机编译；913 个模块 ABI、initramfs 容量、
 FAT 文件回读及 Fastboot 镜像预检通过。清理后已完整刷写 boot/cache，
 两分区整块回读 SHA-256 一致；手机运行的 Build ID 与新 fork 编译结果一致。
@@ -36,9 +36,15 @@ FAT 文件回读及 Fastboot 镜像预检通过。清理后已完整刷写 boot/
 原因待确认，连续重启验证未通过。显示、蓝牙、音频等外设仍有待处理日志，当前不能标为
 完整稳定版本。实机使用保留的 c526 控制 DTB，新候选 DTS 尚未验收。
 
+后续已安装 XFCE，手机屏幕显示通过，Mesa 使用 Adreno 640 硬件加速。
+触摸缺失定位为 GT9886 驱动未移植；补齐后已在线绑定并接入 Xorg/libinput，
+实际点按仍待验证。当前开发提交 `ebadafc3e01cb` 已编译、打包并安装到手机
+供下次启动，尚未重启验证。新触摸提交目前保存在本地。
+
 - [RPMh 回退与 A/B/A 证据](docs/research/2026-09-05-linux73-rpmh-readback-fix.md)
 - [本轮迁移、清理与验收](docs/research/2026-09-05-fork-migration.md)
 - [全量 boot/cache 刷写与实机验证](docs/research/2026-09-05-fork-full-flash.md)
+- [XFCE 与 GT9886 触摸验证](docs/research/2026-09-05-xfce-gt9886.md)
 - [确切内核版本](config/raphael/kernel-source.lock.json)
 
 ## USB 连接

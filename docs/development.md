@@ -90,6 +90,12 @@ RPMh 回退独立为首个提交 `3891bf1e1a5c`。旧基底
 新基底的构建和打包通过并不替代实机启动测试。
 新 fork 已完成一次实机启动，连续软件重启验证仍未通过。
 
+XFCE 桌面已通过实机显示与 FD640 硬件渲染验证。当前锁定的
+`ebadafc3e01cb` 另外补入 GTX8 模块及 Raphael 触摸接线；模块在原 7.3
+内核上已绑定，实际触摸仍待确认。新内核已安装到 cache 供下次启动，
+尚未重启验证，具体版本、恢复路径及桌面安装命令见
+[XFCE 与 GT9886 记录](research/2026-09-05-xfce-gt9886.md)。
+
 供电、音频、SLPI、haptics 和设备树提交保留现有 development/WIP 状态。
 供电驱动来自 `GavinLiuOnline/xiaomi_raphael_kernel` 的
 `c526b7bf7ebc3fbfee244be252a2c1bd061ca749`，版权和许可证保留；

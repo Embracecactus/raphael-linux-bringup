@@ -1,5 +1,5 @@
 # Active sources; historical source locks are in the local pre-fork archive.
 # name | repository | ref | commit | status
-raphael-kernel-fork | https://github.com/Embracecactus/linux.git | refs/heads/raphael/dev | 08de36271e6a23f98712a0719614d2d0a60f1556 | local-commits;hardware-validation-pending
+raphael-kernel-fork | https://github.com/Embracecactus/linux.git | refs/heads/raphael/dev | ebadafc3e01cb8940509e93dfe670e07bd2e13ca | touch-local-commits;installed-next-boot-pending;physical-touch-pending
 linux-upstream-base | https://github.com/torvalds/linux.git | refs/heads/master | 4d7d9486c04d917265f64c55bd23b2cc4fe7749c | verified-fork-and-upstream-ref;tree=5284758ed1191cf5b42c42a0f55c2b2ba9b16b03
 raphael-uboot | https://github.com/GavinLiuOnline/xiaomi_raphael_uboot.git | refs/heads/mailing | b5e36b80ecf58b00f4f4245cf411d73ed36832d5 | pinned-stable-EFI-loader
