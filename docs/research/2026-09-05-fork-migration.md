@@ -1,5 +1,9 @@
 # Linux fork 迁移与 bring-up 仓库精简（2026-09-05）
 
+本记录保留清理和主机验收结束时的状态。此后已按用户要求完整刷写 boot/cache，
+首次启动通过、连续软件重启验证未通过；后续结果见
+[全量刷写与实机验证](2026-09-05-fork-full-flash.md)。
+
 ## 已完成
 
 内核仓库 `Embracecactus/linux` 的本地 `raphael/dev` 分支含 11 个独立提交，

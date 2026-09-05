@@ -1,0 +1,236 @@
+{
+  "date": "2026-09-05",
+  "overall": "FLASH_AND_FIRST_BOOT_PASS_REPEATED_REBOOT_NOT_PASSED",
+  "kernel_commit": "08de36271e6a23f98712a0719614d2d0a60f1556",
+  "upstream_base": "4d7d9486c04d917265f64c55bd23b2cc4fe7749c",
+  "kernel_release": "7.3.0-rc1-raphael-mainline-dev",
+  "kernel_build_id": "3a76eddf6eab35445aa5c7d382d8963018497898",
+  "dtb_sha256": "11a69f06a39c0096cf19fec43ba0739bce547f934ec6a834988293918d7ea211",
+  "dtb_validation_scope": "retained c526 control DTB only; newly compiled candidate DTS not hardware validated",
+  "flash": {
+    "start_unix": 1788595653.435883,
+    "partitions": [
+      "cache",
+      "boot"
+    ],
+    "kernel_commit": "08de36271e6a23f98712a0719614d2d0a60f1556",
+    "reboot_requested": true,
+    "exit_code": 0,
+    "end_unix": 1788595665.7454016
+  },
+  "partitions": {
+    "boot": {
+      "bytes": 134217728,
+      "sha256": "03de919577ce8996d7309d2675f682b21b07bad3349b3f249990a030568439ed",
+      "fastboot_write": "PASS",
+      "first_boot_full_readback": "PASS",
+      "manual_reboot_full_readback": "PASS"
+    },
+    "cache": {
+      "bytes": 268435456,
+      "sha256": "b67344ef921e3d8fbf3c816b4bdb66c21bc0fe2815b9e5a0ba4f2305404a55db",
+      "fastboot_write": "PASS",
+      "first_boot_full_readback": "PASS",
+      "manual_reboot_full_readback": "PASS"
+    }
+  },
+  "flashed_other_partitions": false,
+  "serial_port_operations": false,
+  "userdata": "existing Debian preserved",
+  "boot_policy": "persistent-no-fallback",
+  "first_boot": {
+    "boot_id": "7f103d66-d000-42bf-a602-eb2304d81bc6",
+    "last_uptime_seconds": 448.51,
+    "build_id_match": true,
+    "cpus_online": "0-7",
+    "tainted": 0,
+    "failed_services": 0,
+    "ncm": "active",
+    "ssh": "active"
+  },
+  "controlled_reboot": {
+    "attempted": 1,
+    "planned": 2,
+    "second_attempt_executed": false,
+    "result": "NO_NCM_WITHIN_180_SECOND_MONITOR_WINDOW",
+    "observed_screen": "U-Boot/UFS/GRUB new persistent Linux entry then No RNG device",
+    "cause": "UNRESOLVED",
+    "events": [
+      {
+        "time_unix": 1788596120.951013,
+        "event": "before_reboots",
+        "state": {
+          "release": "7.3.0-rc1-raphael-mainline-dev",
+          "boot_id": "7f103d66-d000-42bf-a602-eb2304d81bc6",
+          "uptime": "448.51",
+          "online": "0-7",
+          "tainted": "0",
+          "system": "running",
+          "gadget": "active",
+          "ssh": "active",
+          "failed": "0"
+        }
+      },
+      {
+        "time_unix": 1788596120.9511547,
+        "event": "reboot_requested",
+        "boot_index": 2,
+        "previous_boot_id": "7f103d66-d000-42bf-a602-eb2304d81bc6"
+      },
+      {
+        "time_unix": 1788596121.1899288,
+        "event": "reboot_command",
+        "boot_index": 2,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "time_unix": 1788596297.032065,
+        "event": "error",
+        "error": "new boot did not return within 180s"
+      }
+    ]
+  },
+  "manual_recovery": {
+    "trigger": "user manual reboot",
+    "boot_id": "27e40fae-e19c-42b4-95fd-92141e5896d3",
+    "last_uptime_seconds": 277.37,
+    "build_id_match": true,
+    "cpus_online": "0-7",
+    "tainted": 0,
+    "failed_services": 0,
+    "ncm": "active",
+    "ssh": "active"
+  },
+  "modules": {
+    "count": 913,
+    "mount": "/usr/lib/modules",
+    "type": "tmpfs",
+    "source": "raphael-modules",
+    "capacity_mib": 128
+  },
+  "pstore": {
+    "current": "empty",
+    "archived_record_kernel": "7.0.0-sm8150-gc526b7bf7ebc-dirty",
+    "attributed_to_current_failure": false
+  },
+  "kernel_log_checks": {
+    "first-boot-health.txt": {
+      "rpmh_write_timeout_or_calltrace": [],
+      "display_smmu_context_fault_count": 10
+    },
+    "manual-reboot-health.txt": {
+      "rpmh_write_timeout_or_calltrace": [],
+      "display_smmu_context_fault_count": 10
+    }
+  },
+  "known_gaps": [
+    "intermittent boot after software reboot",
+    "display SMMU context faults",
+    "missing Bluetooth firmware",
+    "missing regulatory.db",
+    "SLIMbus QMI timeout and SoundWire mismatch; no ALSA cards",
+    "no Wi-Fi association or touch/camera/audio functional test"
+  ],
+  "stable_release": false,
+  "phone_final_state": "running new fork after manual reboot",
+  "wall_clock_note": "Phone RTC is stale; use host events, boot IDs and kernel uptime",
+  "raw_evidence_directory": "artifacts/device-private/20260905-fork-full-flash",
+  "raw_evidence": [
+    {
+      "file": "backup-manifest.json",
+      "bytes": 614,
+      "sha256": "d9467f4849f70c2bba8228067063709e1363ce86f409d8179642617488a34b78"
+    },
+    {
+      "file": "before.txt",
+      "bytes": 541,
+      "sha256": "10e7226848f3868bcd10d52ecb35c1952dc60ce7b8f8d12436003683ec3a23b3"
+    },
+    {
+      "file": "boot-before.img.gz",
+      "bytes": 1127035,
+      "sha256": "53df30749881c15be0d18fd430070c9b71a7ca5df46ee5df92b6370769b8d4ae"
+    },
+    {
+      "file": "controlled-reboots.jsonl",
+      "bytes": 640,
+      "sha256": "6be85572ab25da0dcefd35620b0aa7d3884fa5168053ea1ee75eeef7d227f0a0"
+    },
+    {
+      "file": "deployed-menu-and-module-mount.txt",
+      "bytes": 757,
+      "sha256": "5eca3fad27479f1d1b0c4309ad5eae29d32b3fd33dea9c7141553fa0507eec7c"
+    },
+    {
+      "file": "fastboot-arrival.json",
+      "bytes": 921,
+      "sha256": "988e962e85cde2a97aee442da82b5ea9be4c94aead8f53ff0db964d2386e77ec"
+    },
+    {
+      "file": "first-boot-health.txt",
+      "bytes": 94335,
+      "sha256": "6830bc125a9fe2385fa13de55ec2723dd0cee3ebfdafaee095caddd4d998dc24"
+    },
+    {
+      "file": "first-boot-identity.json",
+      "bytes": 343,
+      "sha256": "c94d12ff6cba4c0637ee6e4e3ef272948c0d65d0a0cfaa3c874aac29d0eae0b2"
+    },
+    {
+      "file": "first-boot-kernel-notes.bin",
+      "bytes": 84,
+      "sha256": "861f109e19596f17e93da855de518404c3330f33e588fd7b7bef43ff46d44c32"
+    },
+    {
+      "file": "first-boot-monitor.jsonl",
+      "bytes": 151,
+      "sha256": "0336a65469bb12c7803562379665b09c2488b8067711553d5530fce0f2be2300"
+    },
+    {
+      "file": "flash-execution.json",
+      "bytes": 228,
+      "sha256": "faa649f6b8291e9b18b7f8c23bdddd0754e3562c30c63226fc6ec88ae89f3d27"
+    },
+    {
+      "file": "flash.log",
+      "bytes": 717,
+      "sha256": "f712fe69fdffc7a5a0e78a53c83e16c3f0b96718ef7bf7f198b4b7d346fdc363"
+    },
+    {
+      "file": "manual-reboot-final-check.txt",
+      "bytes": 570,
+      "sha256": "dcb6bb9dad63c333395469c49a1d59ec18ebc80f28cdfb7b63b48f6c8b655b97"
+    },
+    {
+      "file": "manual-reboot-health.txt",
+      "bytes": 85813,
+      "sha256": "de3779f4beaf6229912d06b5c19ac4ea81928c5f30bc9167729924c340024bff"
+    },
+    {
+      "file": "manual-reboot-identity.json",
+      "bytes": 205,
+      "sha256": "e790d50d996e28d7ea00d00d1bbf2a17490b28349d1c2facd9b033ce6bbf0fdf"
+    },
+    {
+      "file": "manual-reboot-kernel-notes.bin",
+      "bytes": 84,
+      "sha256": "861f109e19596f17e93da855de518404c3330f33e588fd7b7bef43ff46d44c32"
+    },
+    {
+      "file": "pstore-archived.tar",
+      "bytes": 51200,
+      "sha256": "0f3dc225c5b503497e8bdeda1664ef4ec19695cfe33d01e3c45cb3713fc94fd4"
+    },
+    {
+      "file": "pstore-current.tar",
+      "bytes": 10240,
+      "sha256": "e23353fd6728cc086e01ab37960e0e57230e5d44ea8a69043c937463be7227c4"
+    },
+    {
+      "file": "raphael-linux-acceptance-20260905T082248Z.txt",
+      "bytes": 21568,
+      "sha256": "b626e7f3beaab609c4250ec9f8485fa55a913fb7440ee74686e3e1ccf9add37f"
+    }
+  ]
+}

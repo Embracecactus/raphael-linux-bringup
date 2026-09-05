@@ -41,9 +41,9 @@ manifest_value()
 
 fastboot_value()
 {
-	local key="$1" output value
-	output="$("${fastboot_cmd[@]}" getvar "$key" 2>&1)" || true
-	value="$(printf '%s\n' "$output" | sed -n "s/^[[:space:]]*${key}:[[:space:]]*//p" | tail -n 1)"
+	local key="$1" value
+	value="$(printf '%s\n' "$probe_output" | tr -d '\r' |
+		sed -n "s/^[[:space:]]*${key}:[[:space:]]*//p" | tail -n 1)"
 	[[ -n "$value" ]] || die "Fastboot did not return $key"
 	printf '%s\n' "$value"
 }
@@ -69,7 +69,7 @@ case "$action" in
 	*) usage >&2; die "unknown action: $action" ;;
 esac
 
-for tool in awk sed sha256sum stat; do
+for tool in awk sed sha256sum stat timeout; do
 	command -v "$tool" >/dev/null 2>&1 || die "missing host tool: $tool"
 done
 [[ -x "$fastboot" ]] || die "Fastboot tool is missing: $fastboot"
@@ -99,13 +99,17 @@ printf 'cache=%s bytes sha256=%s\n' "$(stat -c %s "$cache_image")" "$(manifest_v
 [[ "$action" != preflight ]] || exit 0
 
 [[ -n "$expected_serial" ]] || die 'set EXPECTED_FASTBOOT_SERIAL to the confirmed phone serial'
-device_list="$("$fastboot" devices)"
+device_list="$(timeout 20s "$fastboot" devices)" || die 'Fastboot enumeration timed out or failed'
 device_count="$(printf '%s\n' "$device_list" | awk 'NF >= 2 { count++ } END { print count+0 }')"
 [[ "$device_count" = 1 ]] || die "expected exactly one Fastboot device, found $device_count"
 device_serial="$(printf '%s\n' "$device_list" | awk 'NF >= 2 { print $1 }')"
 [[ -z "$expected_serial" || "$device_serial" = "$expected_serial" ]] ||
 	die 'connected Fastboot serial differs from the expected target'
 fastboot_cmd=("$fastboot" -s "$device_serial")
+# Query in one session: repeated interface reopen can stall USBIP transfers.
+probe_output="$(timeout 20s "${fastboot_cmd[@]}" getvar product getvar unlocked \
+	getvar partition-size:boot getvar partition-size:cache 2>&1)" ||
+	die "Fastboot identity query timed out or failed: $probe_output"
 [[ "$(fastboot_value product)" = raphael ]] || die 'connected Fastboot product is not raphael'
 [[ "$(fastboot_value unlocked)" = yes ]] || die 'connected Raphael bootloader is not unlocked'
 [[ "$(fastboot_value partition-size:boot)" = 0x8000000 ]] ||
@@ -118,11 +122,14 @@ printf 'device_probe=PASS product=raphael unlocked=yes boot=0x8000000 cache=0x10
 [[ "$write_boot" -eq 1 && "$write_cache" -eq 1 ]] ||
 	die 'flash requires both --write-boot and --write-cache'
 
-"${fastboot_cmd[@]}" flash cache "$cache_image"
-"${fastboot_cmd[@]}" flash boot "$boot_image"
+# Keep both writes in the same connection; Fastboot stops on command failure.
+write_cmd=("${fastboot_cmd[@]}" flash cache "$cache_image" flash boot "$boot_image")
+if [[ "$reboot_after" -eq 1 ]]; then
+	write_cmd+=(reboot)
+fi
+"${write_cmd[@]}"
 printf 'flash=PASS partitions=cache,boot\n'
 if [[ "$reboot_after" -eq 1 ]]; then
-	"${fastboot_cmd[@]}" reboot
 	printf 'reboot=requested\n'
 else
 	printf 'reboot=not-requested\n'

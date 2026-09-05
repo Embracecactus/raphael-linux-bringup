@@ -1,0 +1,66 @@
+{
+  "scope": "host-only fake Fastboot; validates script gates/exit handling and exact invocation, not USB/device implementation",
+  "real_phone_access": false,
+  "cases": [
+    {
+      "case": "wrong_serial",
+      "result": "PASS",
+      "exit_code": 1,
+      "write_invocations": 0
+    },
+    {
+      "case": "wrong_product",
+      "result": "PASS",
+      "exit_code": 1,
+      "write_invocations": 0
+    },
+    {
+      "case": "locked",
+      "result": "PASS",
+      "exit_code": 1,
+      "write_invocations": 0
+    },
+    {
+      "case": "wrong_size",
+      "result": "PASS",
+      "exit_code": 1,
+      "write_invocations": 0
+    },
+    {
+      "case": "missing_key",
+      "result": "PASS",
+      "exit_code": 1,
+      "write_invocations": 0
+    },
+    {
+      "case": "probe_error",
+      "result": "PASS",
+      "exit_code": 1,
+      "write_invocations": 0
+    },
+    {
+      "case": "missing_write_gate",
+      "result": "PASS",
+      "exit_code": 1,
+      "write_invocations": 0
+    },
+    {
+      "case": "flash_error",
+      "result": "PASS",
+      "exit_code": 1,
+      "write_invocations": 1
+    },
+    {
+      "case": "success",
+      "result": "PASS",
+      "exit_code": 0,
+      "write_invocations": 1
+    },
+    {
+      "case": "success_reboot",
+      "result": "PASS",
+      "exit_code": 0,
+      "write_invocations": 1
+    }
+  ]
+}

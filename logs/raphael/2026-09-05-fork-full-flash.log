@@ -1,0 +1,13 @@
+preflight=PASS
+allowlist=boot,cache
+boot=134217728 bytes sha256=03de919577ce8996d7309d2675f682b21b07bad3349b3f249990a030568439ed
+cache=268435456 bytes sha256=b67344ef921e3d8fbf3c816b4bdb66c21bc0fe2815b9e5a0ba4f2305404a55db
+device_probe=PASS product=raphael unlocked=yes boot=0x8000000 cache=0x10000000
+Sending 'cache' (262144 KB)                        OKAY [  6.466s]
+Writing 'cache'                                    OKAY [  1.062s]
+Sending 'boot' (131072 KB)                         OKAY [  3.162s]
+Writing 'boot'                                     OKAY [  0.565s]
+Rebooting                                          OKAY [  0.002s]
+Finished. Total time: 11.508s
+flash=PASS partitions=cache,boot
+reboot=requested

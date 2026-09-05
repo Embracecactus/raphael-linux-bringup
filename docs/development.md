@@ -74,10 +74,11 @@ ARM64 架构、vermagic 和容量。FAT 镜像中的文件须逐字回读一致�
 当作新 DTS 的验证。haptics 节点在该候选 DTS 中启用，但本树没有对应的
 legacy 主线驱动；SLPI 在候选 DTS 中禁用。
 
-新包针对现有 Debian userdata，只包含 boot/cache。它采用单默认内核菜单，
-并非当前手机上带 7.1 恢复入口的多菜单 cache 的逐字副本。
-当前手机的部署证据、7.1 恢复包和已运行的旧 7.3 包另外保留。
-刷写后续应使用确切包清单和明确的部署授权；本次整理没有改变手机。
+新包针对现有 Debian userdata，只包含 boot/cache，采用单默认内核菜单。
+2026-09-05 清理后已授权完整刷写这两个分区，并核验整块回读哈希。
+原多菜单 cache 与 boot 已完整备份；7.1 恢复包和旧 7.3 包另外保留。
+新 fork 首次启动通过，但随后受控重启未在检测窗口内恢复 NCM；手动重启后已恢复。
+当前验证边界见 [实机记录](research/2026-09-05-fork-full-flash.md)。
 
 ## 补丁状态与上游投稿
 
@@ -87,6 +88,7 @@ RPMh 回退独立为首个提交 `3891bf1e1a5c`。旧基底
 用户随后观察到进入系统后持续运行，启动阶段的两次重启原因仍未闭环。
 详见 [RPMh 调试记录](research/2026-09-05-linux73-rpmh-readback-fix.md)。
 新基底的构建和打包通过并不替代实机启动测试。
+新 fork 已完成一次实机启动，连续软件重启验证仍未通过。
 
 供电、音频、SLPI、haptics 和设备树提交保留现有 development/WIP 状态。
 供电驱动来自 `GavinLiuOnline/xiaomi_raphael_kernel` 的
@@ -129,6 +131,12 @@ Debian 基础镜像仍在本地。清理清单位于：
 `EXPECTED_FASTBOOT_SERIAL` 为确认属于该手机的值，再使用 `probe` 或
 `flash --write-boot --write-cache`；`--reboot` 是显式可选动作。
 新包是单菜单 boot/cache，部署前应核对上述恢复布局差异。
+
+设备身份的四项查询合并为一次 Fastboot 调用，完整 cache、boot 写入和可选
+reboot 也合并执行，避免本机 USBIP 上反复打开接口导致的停滞。
+已验证组合为 Linux Platform Tools 37.0.1 与本机 WSL USBIP 路由；主机
+Fastboot 需要有该手机 USB 节点的访问权限。身份、尺寸、哈希和显式双写
+检查仍必须全部通过；传输失败不会打印 `flash=PASS`。
 
 `read_fastboot_vars.sh /path/to/fastboot` 同样要求该序列号变量。
 `backup_recovery_partitions.sh` 要求 `ADB_SERIAL`，只适用于已确认的

@@ -5,5 +5,6 @@
   "upstream_repository": "https://github.com/torvalds/linux.git",
   "upstream_commit": "4d7d9486c04d917265f64c55bd23b2cc4fe7749c",
   "kernel_release": "7.3.0-rc1-raphael-mainline-dev",
-  "hardware_validation": "NOT_RUN_ON_THIS_REBASE"
+  "hardware_validation": "FIRST_BOOT_PASS_CONTROLLED_REBOOT_NO_NCM_WITHIN_180S",
+  "hardware_validation_record": "docs/research/2026-09-05-fork-full-flash.md"
 }

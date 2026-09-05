@@ -28,14 +28,17 @@ bash tools/raphael/flash_fastboot_boot_cache.sh preflight
 
 新 fork 基于 `4d7d9486c04d`，内核提交为 `08de36271e6a`。
 内核、模块、Raphael DTB 已完成主机编译；913 个模块 ABI、initramfs 容量、
-FAT 文件回读及 Fastboot 镜像预检通过。此新基底尚未在手机上启动验证。
+FAT 文件回读及 Fastboot 镜像预检通过。清理后已完整刷写 boot/cache，
+两分区整块回读 SHA-256 一致；手机运行的 Build ID 与新 fork 编译结果一致。
+首次启动观察到 448 秒，8 核在线、USB-NCM/SSH 正常、失败服务为 0。
 
-手机此前运行的是 `940de590b839` 基底加 RPMh 读回回退的 7.3。
-用户确认进入系统后持续运行；此前启动中的两次意外重启尚未查明。
-这次仓库整理没有刷写或重启手机。
+随后一次受控软件重启未在 180 秒检测窗口内恢复 NCM，手动重启后已恢复同一新内核；
+原因待确认，连续重启验证未通过。显示、蓝牙、音频等外设仍有待处理日志，当前不能标为
+完整稳定版本。实机使用保留的 c526 控制 DTB，新候选 DTS 尚未验收。
 
 - [RPMh 回退与 A/B/A 证据](docs/research/2026-09-05-linux73-rpmh-readback-fix.md)
 - [本轮迁移、清理与验收](docs/research/2026-09-05-fork-migration.md)
+- [全量 boot/cache 刷写与实机验证](docs/research/2026-09-05-fork-full-flash.md)
 - [确切内核版本](config/raphael/kernel-source.lock.json)
 
 ## USB 连接
