@@ -1,10 +1,10 @@
 {
   "repository": "https://github.com/Embracecactus/linux.git",
   "branch": "raphael/dev",
-  "commit": "ebadafc3e01cb8940509e93dfe670e07bd2e13ca",
+  "commit": "61192118e44cd9618d4b8114f76266df8581d28f",
   "upstream_repository": "https://github.com/torvalds/linux.git",
   "upstream_commit": "4d7d9486c04d917265f64c55bd23b2cc4fe7749c",
   "kernel_release": "7.3.0-rc1-raphael-mainline-dev",
-  "hardware_validation": "INSTALLED_FOR_NEXT_BOOT_NOT_BOOTED_GTX8_LIVE_BIND_PASS_PHYSICAL_TOUCH_PENDING",
+  "hardware_validation": "BUILD_PACKAGE_PASS_61192118_INSTALLED_GRUB_SWITCHED_BOOT_PENDING_624D_RUNNING_EBADA_TEMPORARY_POLLING_PHYSICAL_TOUCH_USER_CONFIRMED_IRQ_UNRESOLVED",
   "hardware_validation_record": "docs/research/2026-09-05-xfce-gt9886.md"
 }

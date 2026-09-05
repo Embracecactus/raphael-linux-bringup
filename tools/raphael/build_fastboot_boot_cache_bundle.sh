@@ -18,6 +18,7 @@ dtb="${CONTROL_DTB:-$built_dtb}"
 system_map="$build_dir/System.map"
 config="$build_dir/.config"
 build_manifest="$build_dir/build-manifest.txt"
+touch_config="$repo_root/config/raphael/gt9886-polling.conf"
 boot_bytes=134217728
 cache_bytes=268435456
 volume_id=52415048
@@ -44,7 +45,7 @@ case "$output_dir/" in "$build_root"/*) ;; *) die 'OUTPUT_DIR must remain below 
 for tool in awk cmp cpio depmod du file find fsck.fat gzip install lsinitramfs make mcopy mmd mkfs.fat mktemp modinfo sha256sum sort stat truncate unmkinitramfs; do
 	command -v "$tool" >/dev/null 2>&1 || die "missing host tool: $tool"
 done
-for input in "$stable_loader" "$grub_efi" "$stable_initramfs" "$kernel" "$built_dtb" "$dtb" "$system_map" "$config" "$build_manifest"; do
+for input in "$stable_loader" "$grub_efi" "$stable_initramfs" "$kernel" "$built_dtb" "$dtb" "$system_map" "$config" "$build_manifest" "$touch_config"; do
 	[[ -s "$input" ]] || die "missing input: $input"
 done
 [[ -n "$stable_initramfs_release" ]] || die 'STABLE_INITRAMFS_RELEASE must identify the retained initramfs ABI'
@@ -93,6 +94,8 @@ while IFS= read -r -d '' module; do
 	file -b "$module" | grep -q 'ELF 64-bit.*ARM aarch64' || die "module is not ARM64: $module"
 done < <(find "$module_root/lib/modules/$kernel_release" -type f -name '*.ko' -print0)
 cp -a "$module_root/lib/modules/$kernel_release" "$initramfs_root/usr/lib/modules/"
+# Keep the board workaround with the module even when it probes in initramfs.
+install -D -m 0644 "$touch_config" "$initramfs_root/etc/modprobe.d/raphael-gt9886.conf"
 install -m 0755 "$repo_root/tools/raphael/initramfs-live-modules" "$initramfs_root/scripts/init-bottom/raphael-live-modules"
 order_file="$initramfs_root/scripts/init-bottom/ORDER"
 handoff_line='/scripts/init-bottom/raphael-live-modules "$@" || panic "Raphael module handoff failed"'
@@ -142,6 +145,7 @@ fsck.fat -n "$cache_image" >/dev/null
 	printf 'kernel_release=%s\nsource_commit=%s\nsource_content=git\nsource_patch_sha256=none\nconfig_sha256=%s\nkernel_sha256=%s\ndtb_sha256=%s\n' "$kernel_release" "$source_head" "$(sha "$config")" "$(sha "$kernel")" "$(sha "$dtb")"
 	printf 'dtb_input=%s\n' "${dtb#$repo_root/}"
 	printf 'initramfs_sha256=%s\nbase_initramfs_source=%s\nbase_initramfs_sha256=%s\nbase_initramfs_module_release=%s\ngrub_efi_input=%s\ngrub_efi_input_sha256=%s\ninitramfs_module_release=%s\ninitramfs_module_count=%s\ninitramfs_module_bytes=%s\n' "$(sha "$initramfs")" "$stable_initramfs" "$(sha "$stable_initramfs")" "$stable_initramfs_release" "$grub_efi" "$(sha "$grub_efi")" "$kernel_release" "$module_count" "$module_bytes"
+	printf 'touch_input_mode=gtx8-polling-16ms-bringup-workaround\ntouch_config_sha256=%s\n' "$(sha "$touch_config")"
 	printf 'userspace_module_handoff=init-bottom-tmpfs-128MiB;userdata-module-files-unchanged\nuserdata_policy=preserve-existing-Debian-rootfs;never-flash-or-erase\nbaseband_nv_policy=never-flash-or-erase\n'
 } >"$manifest"
 printf 'Built committed-fork Fastboot boot+cache bundle: %s\n' "$output_dir"

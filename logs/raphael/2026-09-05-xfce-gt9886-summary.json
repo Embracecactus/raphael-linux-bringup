@@ -1,12 +1,11 @@
 {
   "date": "2026-09-05",
-  "status": "XFCE_DISPLAY_PASS_GTX8_BOUND_PHYSICAL_TOUCH_AND_NEW_BOOT_PENDING",
-  "source_commit": "ebadafc3e01cb8940509e93dfe670e07bd2e13ca",
+  "status": "XFCE_DISPLAY_PASS_GTX8_BOOT_PASS_PHYSICAL_TOUCH_PASS_WITH_TEMPORARY_POLLING_IRQ_UNRESOLVED_6119_BOOT_PENDING",
+  "source_commit": "61192118e44cd9618d4b8114f76266df8581d28f",
   "source_published": false,
   "kernel_release": "7.3.0-rc1-raphael-mainline-dev",
-  "running_base_commit": "08de36271e6a23f98712a0719614d2d0a60f1556",
-  "running_build_id": "3a76eddf6eab35445aa5c7d382d8963018497898",
-  "next_boot_build_id": "223bccaf12ca6e9bf8ccadefa3ee8d2cd1136cda",
+  "running_base_commit": "ebadafc3e01cb8940509e93dfe670e07bd2e13ca",
+  "running_build_id": "223bccaf12ca6e9bf8ccadefa3ee8d2cd1136cda",
   "desktop": {
     "physical_display_user_confirmed": true,
     "xfce": "4.20.1",
@@ -20,7 +19,36 @@
     "permanent_autologin": false,
     "new_packages": 260,
     "apt_cache_after_clean": "24K",
-    "apt_cache_cleanup_evidence": "artifacts/device-private/20260905-desktop/desktop-boot-transition.txt (after final-runtime-health.txt)"
+    "apt_cache_cleanup_evidence": "artifacts/device-private/20260905-desktop/desktop-boot-transition.txt (after final-runtime-health.txt)",
+    "password_login_retained": true,
+    "lijian_xfce_password_login_confirmed": true,
+    "onboard": {
+      "version": "1.4.1-10",
+      "onboard_install": "24 new, 0 upgraded, 0 removed",
+      "accessibility_dependencies": "gsettings-desktop-schemas, at-spi2-core, gir1.2-atspi-2.0: 3 new, 0 upgraded, 0 removed",
+      "greeter_keyboard": "configured --xid",
+      "xfce_auto_show_and_startup": true,
+      "install_total": "27 new, 0 upgraded, 0 removed",
+      "gsettings": {
+        "auto_show": true,
+        "tablet_mode_detection": false,
+        "docking": true,
+        "start_minimized": true,
+        "icon_palette": true
+      },
+      "xfce_autostart_configured": true
+    },
+    "current_session_health": {
+      "boot_id": "52483143-2111-4000-bd28-8d7f9ccb524b",
+      "uptime": "47 min at capture",
+      "lijian_seat0_session": true,
+      "xfce4_session_running": true,
+      "onboard_running": true,
+      "failed_services": 0,
+      "poll_interval_ms": 16,
+      "boot_mount": "ro",
+      "apt_cache": "24K"
+    }
   },
   "touch": {
     "compatible": "goodix,gt9886",
@@ -31,7 +59,7 @@
     "event_node_at_test": "/dev/input/event3",
     "udev_touchscreen": true,
     "xorg_driver": "libinput",
-    "live_test_module_sha256": "374acab0fe1c2796fd68f9819b49006096416bb91a4983253027c20b2f841a32",
+    "live_test_module_sha256": "1587b2f19a8181fa96a9fb82092915161c8d41bf7ff228de07640e0656023dcf",
     "tainted_after_external_load": 4096,
     "event_window_seconds": 55,
     "events": {
@@ -41,8 +69,27 @@
       "tracking_ends": 0,
       "tracking_starts": 0
     },
-    "physical_acceptance": "PENDING_USER_INPUT",
-    "suspend_resume": "NOT_TESTED"
+    "physical_acceptance": "PASS_USER_CONFIRMED_POLLING",
+    "suspend_resume": "NOT_TESTED",
+    "intree_auto_bind_on_boot": true,
+    "initial_boot_taint": 0,
+    "first_new_kernel_boot_id": "cec78d65-829d-4494-94e8-105d68058f8e",
+    "later_observed_boot_id": "52483143-2111-4000-bd28-8d7f9ccb524b",
+    "raw_touch_scan": "PASS_0x4100_FRAMES_CHANGED_WITH_USER_SWIPE",
+    "irq_delivery": "FAIL_IRQ174_GPIO122_ZERO",
+    "irq_domain": "msmgpio_hwirq122_to_PDC90_to_GICv3_602",
+    "reversible_diagnostics": {
+      "coordinate_ack_once": "NO_IMPROVEMENT",
+      "gpio122_pullup_16mA_edge_falling": "NO_IMPROVEMENT_RESTORED",
+      "reset54_low_2ms_high_100ms_after_pullup": "NO_IMPROVEMENT_RESTORED"
+    },
+    "poll_diagnostic": "USER_CONFIRMED_DESKTOP_OPERATION_TEMPORARY_EXTERNAL_16MS; NOT_PERMANENT_FIX",
+    "running_mode": "TEMPORARY_EXTERNAL_MODULE_POLLING_16MS_ON_EBADA",
+    "irq_root_cause": "UNRESOLVED",
+    "latest_poll_window_seconds": 60,
+    "latest_poll_window_event_count": 0,
+    "formal_press_release_coordinate_acceptance": "NOT_ESTABLISHED",
+    "first_live_irq_test_module_sha256": "374acab0fe1c2796fd68f9819b49006096416bb91a4983253027c20b2f841a32"
   },
   "build": {
     "result": "PASS",
@@ -57,20 +104,23 @@
   },
   "deployment": {
     "method": "NCM_SSH_FILESYSTEM_UPDATE",
-    "next_boot_directory": "/boot/raphael-ebadafc3",
-    "kernel_sha256": "9a4ecd3d9bbd6d50f3e8e743303c17bbb0f6c16699bec827b0a8705a58399071",
-    "initramfs_sha256": "a53ca2c17fe4b3f2d3519485c05da03efada4d02d660cdc5b42882834679c0af",
-    "grub_sha256": "cab50c728c338b90d39e4c177d742c89a830190f19faf996546c1bd50d8e6f53",
+    "next_boot_directory": "/boot/raphael-61192118",
+    "kernel_sha256": "a08501b3b953ecd32c9f8ce2c5769d23d9d3d4156858165fc803cdb81a2d8d14",
+    "initramfs_sha256": "7496ef83c2bae5e558f4c98953ff1440926a22a72b68bbd7766ba9e24050ae5c",
+    "grub_sha256": "750c6be64a50c7945f1d84de33e12f6cf36bd79f29c0a6d5f4806eefa50787c0",
     "readback": "PASS",
     "boot_mount_after": "ro",
-    "backup_directory": "/var/backups/raphael/boot-before-gtx8-20260905",
+    "backup_directory": "/var/backups/raphael/boot-before-polling-20260905",
     "reboot_executed": false,
-    "new_kernel_boot": "NOT_RUN",
-    "full_fastboot_flash_this_step": false
+    "new_kernel_boot": "PENDING_6119_BUILD_ID_624D",
+    "full_fastboot_flash_this_step": false,
+    "current_boot_interpretation": "later boot follows recorded normal poweroff; not classified as panic",
+    "polling_config_sha256": "8c25ed0e75fac0faba8bc016313b5beefb41ec7ae3878c2c15133ff3dee8ebef",
+    "initramfs_polling_config_readback": "PASS_SHA256_MATCH_SOURCE_CONFIG"
   },
   "package": {
     "preflight": "PASS",
-    "cache_sha256": "60eec39fa73763053a1e9d707b3fc5ae14c40217ba5b553282260ba0e4e45f4f",
+    "cache_sha256": "431eeb7d2ee779e475ce416ea7dfa499eddf419e889d9ea8858d5fb08748c77b",
     "boot_sha256": "03de919577ce8996d7309d2675f682b21b07bad3349b3f249990a030568439ed",
     "entire_package_flashed": false
   },
@@ -81,5 +131,7 @@
     "implication": "explains these two desktop poweroffs only; earlier boot regressions remain separate"
   },
   "serial_port_operations": false,
-  "evidence_directory": "artifacts/device-private/20260905-desktop/"
+  "evidence_directory": "artifacts/device-private/20260905-desktop/",
+  "next_boot_commit": "61192118e44cd9618d4b8114f76266df8581d28f",
+  "next_boot_build_id": "624d1f332723d399e2b95a584d77b8e7c5da8faa"
 }

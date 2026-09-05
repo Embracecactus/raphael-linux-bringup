@@ -36,10 +36,14 @@ FAT 文件回读及 Fastboot 镜像预检通过。清理后已完整刷写 boot/
 原因待确认，连续重启验证未通过。显示、蓝牙、音频等外设仍有待处理日志，当前不能标为
 完整稳定版本。实机使用保留的 c526 控制 DTB，新候选 DTS 尚未验收。
 
-后续已安装 XFCE，手机屏幕显示通过，Mesa 使用 Adreno 640 硬件加速。
-触摸缺失定位为 GT9886 驱动未移植；补齐后已在线绑定并接入 Xorg/libinput，
-实际点按仍待验证。当前开发提交 `ebadafc3e01cb` 已编译、打包并安装到手机
-供下次启动，尚未重启验证。新触摸提交目前保存在本地。
+XFCE 已在手机屏幕显示，Mesa 使用 Adreno 640 硬件加速。GT9886 的 IRQ 通知路径
+仍未闭环；运行中的 `ebadafc3e01cb` 内核以临时外部 16 ms 轮询模块恢复桌面操作，
+用户已确认触摸可用。该结果不是 IRQ 修复，也不替代按下/释放/坐标的自动采集验收。
+
+开发提交 `61192118e44c` 已将可选轮询迁入树内：默认仍为 IRQ，配置仅对模块传入
+`poll_interval_ms=16`。它已完成完整构建、打包、在线安装和 GRUB 切换，但 Build ID
+`624d1f332723d399e2b95a584d77b8e7c5da8faa` **尚未启动验证**。密码登录保持启用；
+Onboard 已安装并配置为 greeter 和 `lijian` XFCE 会话中的屏幕键盘。
 
 - [RPMh 回退与 A/B/A 证据](docs/research/2026-09-05-linux73-rpmh-readback-fix.md)
 - [本轮迁移、清理与验收](docs/research/2026-09-05-fork-migration.md)
