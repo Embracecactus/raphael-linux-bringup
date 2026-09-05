@@ -5,6 +5,6 @@
   "upstream_repository": "https://github.com/torvalds/linux.git",
   "upstream_commit": "4d7d9486c04d917265f64c55bd23b2cc4fe7749c",
   "kernel_release": "7.3.0-rc1-raphael-mainline-dev",
-  "hardware_validation": "BUILD_PACKAGE_PASS_61192118_INSTALLED_GRUB_SWITCHED_BOOT_PENDING_624D_RUNNING_EBADA_TEMPORARY_POLLING_PHYSICAL_TOUCH_USER_CONFIRMED_IRQ_UNRESOLVED",
+  "hardware_validation": "61192118_BOOT_PASS_BUILD_ID_624D_TAINT0_GTX8_POLLING16_AUTOLOAD_PASSWORD_LOGIN_IRQ_UNRESOLVED",
   "hardware_validation_record": "docs/research/2026-09-05-xfce-gt9886.md"
 }

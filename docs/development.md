@@ -90,16 +90,18 @@ RPMh 回退独立为首个提交 `3891bf1e1a5c`。旧基底
 新基底的构建和打包通过并不替代实机启动测试。
 新 fork 已完成一次实机启动，连续软件重启验证仍未通过。
 
-XFCE 桌面已通过实机显示与 FD640 硬件渲染验证。运行中的
-`ebadafc3e01cb` 以临时外部 16 ms GTX8 轮询模块恢复了桌面操作，用户确认触摸可用；
-IRQ 通知根因仍未确定，60 秒采集窗口不能作为完整输入事件验收。
+XFCE 桌面已通过实机显示与 FD640 硬件渲染验证。GTX8 16 ms 轮询恢复桌面操作，
+用户确认触摸可用；IRQ 通知根因仍未确定，60 秒采集窗口不能作为完整输入事件验收。
 
-`61192118e44c` 将该轮询作为可选 bring-up 参数迁入树内，默认继续使用 IRQ；
-默认模块配置文件 `config/raphael/gt9886-polling.conf` 才选择 16 ms。该提交的
-Build ID `624d1f332723d399e2b95a584d77b8e7c5da8faa` 已构建、打包、安装并切换 GRUB，
-尚待首次启动验证。Onboard 与必要的 accessibility 依赖已安装，保留密码登录，
-在 greeter 和 `lijian` XFCE 会话中配置屏幕键盘。具体边界见
+`61192118e44c` 将轮询作为可选 bring-up 参数迁入树内，驱动默认继续使用 IRQ；
+本机配置 `config/raphael/gt9886-polling.conf` 选择 16 ms。该提交的 Build ID
+`624d1f332723d399e2b95a584d77b8e7c5da8faa` 已实机重启通过，taint 为 0，
+参数 16 自动生效，`lijian` 已完成密码登录。Onboard 和 accessibility 依赖已安装，
+greeter 及 XFCE 会话已配置屏幕键盘。具体边界见
 [XFCE 与 GT9886 记录](research/2026-09-05-xfce-gt9886.md)。
+Phosh 已作为默认 Wayland 会话验证重启、密码解锁、锁屏唤醒和 Wi-Fi 连接；
+系统设置、密钥服务及相机应用的配置与外设限制见
+[Phosh 记录](research/2026-09-05-phosh.md)。
 
 供电、音频、SLPI、haptics 和设备树提交保留现有 development/WIP 状态。
 供电驱动来自 `GavinLiuOnline/xiaomi_raphael_kernel` 的

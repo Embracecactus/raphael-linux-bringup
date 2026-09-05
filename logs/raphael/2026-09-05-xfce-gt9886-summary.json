@@ -1,11 +1,11 @@
 {
   "date": "2026-09-05",
-  "status": "XFCE_DISPLAY_PASS_GTX8_BOOT_PASS_PHYSICAL_TOUCH_PASS_WITH_TEMPORARY_POLLING_IRQ_UNRESOLVED_6119_BOOT_PENDING",
+  "status": "PHOSH_REBOOT_UNLOCK_POWER_KEY_WIFI_CONNECTION_PASS_GTX8_POLLING16_IRQ_UNRESOLVED_AUDIO_CAMERA_BLOCKED",
   "source_commit": "61192118e44cd9618d4b8114f76266df8581d28f",
   "source_published": false,
   "kernel_release": "7.3.0-rc1-raphael-mainline-dev",
-  "running_base_commit": "ebadafc3e01cb8940509e93dfe670e07bd2e13ca",
-  "running_build_id": "223bccaf12ca6e9bf8ccadefa3ee8d2cd1136cda",
+  "running_base_commit": "61192118e44cd9618d4b8114f76266df8581d28f",
+  "running_build_id": "624d1f332723d399e2b95a584d77b8e7c5da8faa",
   "desktop": {
     "physical_display_user_confirmed": true,
     "xfce": "4.20.1",
@@ -38,7 +38,7 @@
       },
       "xfce_autostart_configured": true
     },
-    "current_session_health": {
+    "previous_xfce_session_health": {
       "boot_id": "52483143-2111-4000-bd28-8d7f9ccb524b",
       "uptime": "47 min at capture",
       "lijian_seat0_session": true,
@@ -48,6 +48,44 @@
       "poll_interval_ms": 16,
       "boot_mount": "ro",
       "apt_cache": "24K"
+    },
+    "phosh": {
+      "version": "0.46.0-3+deb13u1",
+      "phoc": "0.46.0-1",
+      "squeekboard": "1.43.1-1",
+      "new_packages": 323,
+      "upgraded_packages": 0,
+      "removed_packages": 0,
+      "session_type": "wayland",
+      "default_session": "phosh",
+      "fallback_session": "XFCE",
+      "password_login_retained": true,
+      "lockscreen_password_unlock_user_confirmed": true,
+      "reboot_boot_id": "f256be5d-f78f-459b-bfb3-5f14c34be07f",
+      "reboot_pass": true,
+      "polkit_installed": true,
+      "power_key_inhibitor_observed": true,
+      "logind_handle_power_key": "lock",
+      "physical_power_key_acceptance": "PASS_USER_CONFIRMED_LOCK_WAKE_UNLOCK",
+      "record": "docs/research/2026-09-05-phosh.md",
+      "evidence": "artifacts/device-private/20260905-desktop/phosh-runtime-acceptance.txt",
+      "gnome_control_center": "48.4-1~deb13u1",
+      "gnome_keyring": "48.0-1",
+      "camera_app": "gnome-snapshot 48.0.1-1",
+      "network_control_authorized": true,
+      "wifi_connection": "PASS_NM_WLAN0_CONNECTED_DHCP",
+      "wifi_quick_settings_new_network_prompt": "NOT_SEPARATELY_RETESTED_AFTER_INSTALL",
+      "apt_cache_after_clean": "24K",
+      "system_failed_services_at_reboot_acceptance": 0,
+      "user_failed_services_at_reboot_acceptance": 0,
+      "final_evidence": "artifacts/device-private/20260905-desktop/phosh-desktop-final-health.txt",
+      "lijian_admin": {
+        "user_authorized": true,
+        "sudo_group_member": true,
+        "sudoers_validation": "PASS",
+        "password_authentication_retained": true,
+        "fresh_gui_admin_authentication": "NOT_YET_RETESTED"
+      }
     }
   },
   "touch": {
@@ -84,12 +122,14 @@
       "reset54_low_2ms_high_100ms_after_pullup": "NO_IMPROVEMENT_RESTORED"
     },
     "poll_diagnostic": "USER_CONFIRMED_DESKTOP_OPERATION_TEMPORARY_EXTERNAL_16MS; NOT_PERMANENT_FIX",
-    "running_mode": "TEMPORARY_EXTERNAL_MODULE_POLLING_16MS_ON_EBADA",
+    "running_mode": "INTREE_MODULE_POLLING_16MS_ON_61192118",
     "irq_root_cause": "UNRESOLVED",
     "latest_poll_window_seconds": 60,
     "latest_poll_window_event_count": 0,
     "formal_press_release_coordinate_acceptance": "NOT_ESTABLISHED",
-    "first_live_irq_test_module_sha256": "374acab0fe1c2796fd68f9819b49006096416bb91a4983253027c20b2f841a32"
+    "first_live_irq_test_module_sha256": "374acab0fe1c2796fd68f9819b49006096416bb91a4983253027c20b2f841a32",
+    "intree_polling_boot_taint": 0,
+    "intree_polling_reboot_evidence": "artifacts/device-private/20260905-desktop/gt9886-polling-next-boot.txt"
   },
   "build": {
     "result": "PASS",
@@ -111,12 +151,14 @@
     "readback": "PASS",
     "boot_mount_after": "ro",
     "backup_directory": "/var/backups/raphael/boot-before-polling-20260905",
-    "reboot_executed": false,
-    "new_kernel_boot": "PENDING_6119_BUILD_ID_624D",
+    "reboot_executed": true,
+    "new_kernel_boot": "PASS_BUILD_ID_624D_TAINT0_POLLING16_AUTOLOAD_PASSWORD_LOGIN",
     "full_fastboot_flash_this_step": false,
     "current_boot_interpretation": "later boot follows recorded normal poweroff; not classified as panic",
     "polling_config_sha256": "8c25ed0e75fac0faba8bc016313b5beefb41ec7ae3878c2c15133ff3dee8ebef",
-    "initramfs_polling_config_readback": "PASS_SHA256_MATCH_SOURCE_CONFIG"
+    "initramfs_polling_config_readback": "PASS_SHA256_MATCH_SOURCE_CONFIG",
+    "reboot_actor": "user",
+    "validated_boot_id": "d62f9ed2-1142-41d2-ace1-437591cb584d"
   },
   "package": {
     "preflight": "PASS",
@@ -133,5 +175,30 @@
   "serial_port_operations": false,
   "evidence_directory": "artifacts/device-private/20260905-desktop/",
   "next_boot_commit": "61192118e44cd9618d4b8114f76266df8581d28f",
-  "next_boot_build_id": "624d1f332723d399e2b95a584d77b8e7c5da8faa"
+  "next_boot_build_id": "624d1f332723d399e2b95a584d77b8e7c5da8faa",
+  "previous_running_base_commit": "ebadafc3e01cb8940509e93dfe670e07bd2e13ca",
+  "previous_running_build_id": "223bccaf12ca6e9bf8ccadefa3ee8d2cd1136cda",
+  "peripheral_desktop_tests": {
+    "audio": {
+      "alsa_soundcards": 0,
+      "pipewire_sink": "Dummy Output",
+      "control_dtb_sound_compatible": "qcom,sm8150-sndcard",
+      "driver_compatible_fallback": "qcom,sdm845-sndcard",
+      "runtime_override_test": "bind returned EIO; no soundcard; override cleared and snd_soc_sdm845 unloaded",
+      "physical_playback": "BLOCKED_NO_SOUNDCARD",
+      "evidence": "artifacts/device-private/20260905-desktop/audio-runtime-bind-test.txt"
+    },
+    "camera": {
+      "application_started": true,
+      "application_user": "lijian",
+      "v4l2_devices": 0,
+      "media_devices": 0,
+      "sm8150_camss_support_in_current_tree": false,
+      "physical_preview": "BLOCKED_USER_PHOTO_NO_CAMERA_FOUND"
+    },
+    "observed_warnings": [
+      "GPU translation faults during desktop use",
+      "occasional GTX8 touch-frame checksum errors"
+    ]
+  }
 }
