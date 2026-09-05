@@ -2,7 +2,7 @@
   "date": "2026-09-05",
   "status": "PHOSH_REBOOT_UNLOCK_POWER_KEY_WIFI_CONNECTION_PASS_GTX8_POLLING16_IRQ_UNRESOLVED_AUDIO_CAMERA_BLOCKED",
   "source_commit": "61192118e44cd9618d4b8114f76266df8581d28f",
-  "source_published": false,
+  "source_published": true,
   "kernel_release": "7.3.0-rc1-raphael-mainline-dev",
   "running_base_commit": "61192118e44cd9618d4b8114f76266df8581d28f",
   "running_build_id": "624d1f332723d399e2b95a584d77b8e7c5da8faa",
