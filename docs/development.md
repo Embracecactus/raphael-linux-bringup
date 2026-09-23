@@ -11,14 +11,14 @@
 源码，也不提交构建产物、设备私钥或 NV/校准备份。
 内核版本锁在 [`config/raphael/kernel-source.lock.json`](../config/raphael/kernel-source.lock.json)。
 当前开发分支为 `raphael/dev`，`master` 保持原始上游内容。
-本轮提交先保存在本地，远端发布状态以实际 push 结果为准。
+启动依赖发布与边界见 [交付说明](boot-inputs-release.md)。
 
 本轮基底为 `4d7d9486c04d917265f64c55bd23b2cc4fe7749c`，从用户 fork
 取得，且与当时核验的 `torvalds/linux master` 相同。该提交的 Makefile
 版本仍为 `7.3.0-rc1`。本地采用 shallow/no-tags 获取以节省磁盘；需要查看
 旧历史时按需 fetch/deepen，远端 fork 的历史不受影响。
 
-首次准备源码（开发分支发布后）：
+首次准备源码：
 
 ```sh
 git clone --filter=blob:none --single-branch --branch raphael/dev \
@@ -33,6 +33,8 @@ git -C linux branch master upstream/master
 不能只修改显示出来的版本号。
 
 ## 构建和打包
+
+下载工具需要 Python 3.9+、HTTPS 网络，无需 GitHub 认证。
 
 主机需要 GCC ARM64 交叉工具链、make、bison、flex、OpenSSL/ELF 开发库、
 dtc、mtools、dosfstools、cpio、gzip、kmod 和 initramfs-tools。
@@ -63,7 +65,20 @@ ARM64 架构、vermagic 和容量。FAT 镜像中的文件须逐字回读一致�
 本地必须保留 `artifacts/retained/raphael-boot-inputs/`，其输入哈希锁在
 [`boot-inputs.lock.json`](../config/raphael/boot-inputs.lock.json)。
 缺失或哈希不符会停止打包；不能从任意旧构建目录自动替代。
-迁移到另一台主机时，应单独转移这些已核验输入；Git clone 本身不含它们。
+Git clone 本身不含这些二进制。当前固定 Release 提供三项公开安全子集，
+initramfs 因厂商固件授权未确认而暂缓；不能宣称全新主机已可获取完整输入。
+
+```sh
+python3 tools/raphael/fetch_boot_inputs.py --download-only /tmp/raphael-boot-inputs-public-subset-20260923-v1.tar.gz
+# 自己持有匹配原 initramfs 时，四项全部校验后才安装：
+python3 tools/raphael/fetch_boot_inputs.py --local-input-dir /path/to/your-original-inputs
+python3 tools/raphael/fetch_boot_inputs.py --check
+```
+
+Release 提供 retained 二进制及对应源码/许可附件；当前内核、模块和候选 DTB
+由锁定的内核源码构建。原 lock 哈希不变，完整说明见 [启动输入交付](boot-inputs-release.md)。
+[rootfs 交付](rootfs-delivery.md) 是独立边界；已有 Debian 更新 boot/cache 与
+新手机首次安装需要的 userdata、凭据和验证不同。
 
 输入保留了 U-Boot、GRUB、7.1 恢复 initramfs 和 c526 控制 DTB。
 打包时删去 initramfs 内唯一的旧模块 ABI，换成新内核的全部模块。
@@ -119,7 +134,7 @@ Phosh 已作为默认 Wayland 会话验证重启、密码解锁、锁屏唤醒�
 ## 仓库精简和历史材料
 
 旧版本构建、one-shot/HIL 实验入口、重复 DTS/patch 副本及过时文档已从
-本仓库活动目录移除。保留 10 个工具文件，日常只使用上面的 fork 入口。
+本仓库活动目录移除。本次恢复了历史服务器 rootfs 脚本及四个配套文件，日常内核仍使用上面的 fork 入口。
 现用 U-Boot 构建脚本只保留 stable EFI 路径。
 
 清理前所有 docs、logs、tools、patches、ports、upstream 和来源锁均归档到

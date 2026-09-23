@@ -4,6 +4,23 @@ Redmi K20 Pro（`raphael`）的 Linux 构建和部署工具。
 内核源码与适配提交维护在 [Embracecactus/linux](https://github.com/Embracecactus/linux)
 的 `raphael/dev` 分支；本仓库负责把该源码构建为可核验的启动包。
 
+## 启动输入交付
+
+[固定 Release：boot-inputs-20260923-v1](https://github.com/Embracecactus/raphael-linux-bringup/releases/tag/boot-inputs-20260923-v1)
+公开 **U-Boot、GRUB EFI、历史控制 DTB 三项安全子集**及对应源码/许可证。
+原 initramfs 含分发授权未确认的厂商固件，暂不上传；全新克隆尚不能仅靠 Release
+凑齐四项输入，更不能据此首次安装新手机。没有 userdata，不是完整稳定 ROM。
+
+```sh
+python3 tools/raphael/fetch_boot_inputs.py --download-only /tmp/raphael-boot-inputs-public-subset-20260923-v1.tar.gz
+# 自己已合法持有原始、锁定哈希匹配的 initramfs 时：
+python3 tools/raphael/fetch_boot_inputs.py --local-input-dir /path/to/your-original-inputs
+python3 tools/raphael/fetch_boot_inputs.py --check
+```
+
+[输入核验、下载与限制](docs/boot-inputs-release.md) ·
+[rootfs 构建材料与缺口](docs/rootfs-delivery.md)。
+
 ## 当前入口
 
 ```sh
@@ -19,7 +36,7 @@ bash tools/raphael/flash_fastboot_boot_cache.sh preflight
 | --- | --- |
 | `linux/` | 独立内核 checkout，父仓库忽略 |
 | `config/raphael/` | 内核提交号、启动输入哈希 |
-| `tools/raphael/` | 10 个现用构建、打包、部署及采集文件 |
+| `tools/raphael/` | 构建、下载、打包、部署及历史 rootfs 工具 |
 | `docs/` | 开发说明、RPMh 回归证据、迁移验收 |
 | `logs/raphael/` | 本轮构建验收及关键 A/B/A 记录 |
 | `artifacts/` | 本地构建、恢复材料和历史归档，不进入 Git |
@@ -55,8 +72,10 @@ Phosh 已作为默认手机桌面重启并解锁，使用 Wayland 与 Squeekboar
 ## USB 连接
 
 ```sh
-ssh -i artifacts/device-private/raphael-linux-id_ed25519 raphael@172.16.42.1
+ssh -i /path/to/your-own-private-key your-user@172.16.42.1
 ```
+
+新设备使用自己的用户凭据和公钥；示例路径须换为你自己的私钥，不能索取或复用原设备私钥。
 
 只读状态采集使用 `tools/raphael/collect_linux_acceptance_runtime.sh`。
 Fastboot/ADB 操作须显式指定已确认手机的序列号。私钥、原始设备信息、

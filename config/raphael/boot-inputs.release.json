@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "repository": "Embracecactus/raphael-linux-bringup",
+  "tag": "boot-inputs-20260923-v1",
+  "status": "partial-firmware-redistribution-blocked",
+  "lock_file": "config/raphael/boot-inputs.lock.json",
+  "archive": {
+    "name": "raphael-boot-inputs-public-subset-20260923-v1.tar.gz",
+    "bytes": 1616437,
+    "sha256": "ec29a6d78eeae5d2d3f8757e933ca5afdfedddf13eab14838f3a3e7ceb6e0674",
+    "url": "https://github.com/Embracecactus/raphael-linux-bringup/releases/download/boot-inputs-20260923-v1/raphael-boot-inputs-public-subset-20260923-v1.tar.gz",
+    "inputs": [
+      "BOOTAA64.EFI",
+      "control-sm8150-xiaomi-raphael.dtb",
+      "raphael-uboot-cache.img"
+    ]
+  },
+  "corresponding_source": {
+    "name": "raphael-boot-inputs-sources-20260923-v1.tar.gz",
+    "bytes": 53699760,
+    "sha256": "cf980f3ddfc70147653516da9c6b6743b83bbd8348f8de42fdf5f3c0c2b93ab2",
+    "url": "https://github.com/Embracecactus/raphael-linux-bringup/releases/download/boot-inputs-20260923-v1/raphael-boot-inputs-sources-20260923-v1.tar.gz"
+  },
+  "withheld": {
+    "recovery-initramfs-7.1": "No redistribution grant found for the 43 included vendor firmware files; do not upload or alter the original."
+  }
+}
