@@ -115,8 +115,10 @@ BUNDLE="$PWD/artifacts/build/my-new-boot-bundle" bash tools/raphael/flash_fastbo
 - 完整四项匿名恢复：BLOCKED。未公开 initramfs，默认命令退出 1，且未创建 retained
   安装目录。完整安装逻辑只在本机原输入与安全归档组合下通过，不能冒称四项匿名下载通过。
 - 五项 Release 附件上传后服务端大小与 SHA-256 均通过核验，随后草稿公开为 prerelease。
-  附加源码/声明附件的补充匿名下载遇到 TLS EOF，有限重试后仍未完成；不将服务端
-  digest 核验写成它们全部经过匿名下载。必需的公开三文件数据包已由新工具匿名下载通过。
+  随后五项附件也全部匿名下载并按大小/SHA-256 校验通过。数据包使用新工具的固定
+  Release URL；附加材料在网页域名出现 TLS EOF 后改用官方公开 Asset API（无 Token
+  或 Cookie）。源码包以 HTTP Range 校验分段和总长，合并后核对原 53699760 字节
+  与 SHA-256；没有用本地源码包代替下载。
 - 下载工具 7 组安全回归测试通过；rootfs 脚本/辅助文件语法与 builder tree 校验通过。
 
 公开结果见 [结构化验收记录](../logs/raphael/2026-09-23-boot-inputs-delivery.json)。

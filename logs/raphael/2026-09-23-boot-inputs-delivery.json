@@ -43,31 +43,36 @@
       "name": "BOOT-INPUTS-NOTICE-20260923-v1.md",
       "bytes": 4466,
       "sha256": "3cfb3523738215bf1710007c5f413d49a04e1939978c73b35350593c4e7672b8",
-      "github_asset_digest_match": true
+      "github_asset_digest_match": true,
+      "anonymous_download_verified": true
     },
     {
       "name": "SHA256SUMS-20260923-v1",
       "bytes": 433,
       "sha256": "291a26430f2a1f8d1a3266b166e4f5588b2e9e0760371cdc380bc115abc6fefc",
-      "github_asset_digest_match": true
+      "github_asset_digest_match": true,
+      "anonymous_download_verified": true
     },
     {
       "name": "boot-inputs-files-20260923-v1.json",
       "bytes": 637,
       "sha256": "7df4f452c388ab81e2170e3ca5b27545b44ebab43d86cde79493bcc6650b1e5f",
-      "github_asset_digest_match": true
+      "github_asset_digest_match": true,
+      "anonymous_download_verified": true
     },
     {
       "name": "raphael-boot-inputs-public-subset-20260923-v1.tar.gz",
       "bytes": 1616437,
       "sha256": "ec29a6d78eeae5d2d3f8757e933ca5afdfedddf13eab14838f3a3e7ceb6e0674",
-      "github_asset_digest_match": true
+      "github_asset_digest_match": true,
+      "anonymous_download_verified": true
     },
     {
       "name": "raphael-boot-inputs-sources-20260923-v1.tar.gz",
       "bytes": 53699760,
       "sha256": "cf980f3ddfc70147653516da9c6b6743b83bbd8348f8de42fdf5f3c0c2b93ab2",
-      "github_asset_digest_match": true
+      "github_asset_digest_match": true,
+      "anonymous_download_verified": true
     }
   ],
   "audit": {
@@ -97,7 +102,8 @@
     "existing_bundle_preflight": "PASS_NOT_A_NEW_BUILD",
     "hardware_boot": "NOT_RUN",
     "phone_operations": "NONE",
-    "anonymous_auxiliary_asset_download": "NOT_COMPLETED_TLS_EOF; all five uploaded sizes/digests verified using GitHub API"
+    "anonymous_auxiliary_asset_download": "PASS_PUBLIC_GITHUB_ASSET_API_NO_CREDENTIALS; source archive fetched with checked HTTP Range and final SHA-256",
+    "all_five_assets_anonymous_download": "PASS"
   },
   "rootfs": {
     "restored_builder_and_helpers": 5,
