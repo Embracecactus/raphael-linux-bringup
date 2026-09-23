@@ -2,7 +2,7 @@
   "date": "2026-09-24",
   "base_commit": "81b0b6f26a97bd0db4bc44c98f3bf8a0cb8af1c2",
   "release_tag": "boot-inputs-20260924-v1",
-  "release_status": "PREPARED_LOCAL_NOT_YET_PUBLISHED",
+  "release_status": "PUBLISHED_PRERELEASE_FOUR_INPUTS",
   "original_lock_unchanged": true,
   "packaging_entrypoints_unchanged": true,
   "fetch_tool_unchanged": true,
@@ -10,27 +10,37 @@
     {
       "name": "BOOT-INPUTS-NOTICE-20260924-v1.md",
       "bytes": 4953,
-      "sha256": "877b6675aea75b0092e04686fb21e67223e752eb19c677e40a9a15f533000565"
+      "sha256": "877b6675aea75b0092e04686fb21e67223e752eb19c677e40a9a15f533000565",
+      "github_digest_match": true,
+      "anonymous_download_verified": true
     },
     {
       "name": "SHA256SUMS-20260924-v1",
       "bytes": 419,
-      "sha256": "fbca60e72478578b508524cab452e7728e452a14f4cb92af164c04899b68a5d1"
+      "sha256": "fbca60e72478578b508524cab452e7728e452a14f4cb92af164c04899b68a5d1",
+      "github_digest_match": true,
+      "anonymous_download_verified": true
     },
     {
       "name": "boot-inputs-files-20260924-v1.json",
       "bytes": 556,
-      "sha256": "a91eb994dc7af40e41c16fa5eef41153c963d24f95c9806a5747362d88f0d0d4"
+      "sha256": "a91eb994dc7af40e41c16fa5eef41153c963d24f95c9806a5747362d88f0d0d4",
+      "github_digest_match": true,
+      "anonymous_download_verified": true
     },
     {
       "name": "raphael-boot-inputs-20260924-v1.tar.gz",
       "bytes": 32152495,
-      "sha256": "dfc52362a5e03fa018857fd22c68bc1c2910d9e9bd677e098b9137d7a92578cb"
+      "sha256": "dfc52362a5e03fa018857fd22c68bc1c2910d9e9bd677e098b9137d7a92578cb",
+      "github_digest_match": true,
+      "anonymous_download_verified": true
     },
     {
       "name": "raphael-initramfs-materials-20260924-v1.tar.gz",
       "bytes": 234538,
-      "sha256": "92079a124632ed57a68dd778288a205403307d3a52698bff95e4cd54fe19b2a4"
+      "sha256": "92079a124632ed57a68dd778288a205403307d3a52698bff95e4cd54fe19b2a4",
+      "github_digest_match": true,
+      "anonymous_download_verified": true
     }
   ],
   "inputs": {
@@ -80,12 +90,22 @@
   "tests": {
     "security_unittests": "PASS_7_GROUPS",
     "local_archive_install_repeat_and_check": "PASS_4_OF_4",
-    "anonymous_remote_download_restore": "PENDING_PUBLICATION",
+    "anonymous_remote_download_restore": "PASS_4_OF_4",
     "fresh_packaging": "BLOCKED_ORIGINAL_KERNEL_O_DIRECTORY_REMOVED",
     "existing_bundle_preflight": "PASS_NOT_A_NEW_BUILD",
     "fresh_host_full_compile": "NOT_RUN",
     "hardware_boot": "NOT_RUN",
-    "phone_operations": "NONE"
+    "phone_operations": "NONE",
+    "anonymous_remote_clone": "PASS_FIXED_TAG",
+    "anonymous_download_method": "Anonymous fixed Release URL; eight checked HTTP ranges; combined full SHA-256; original fetch tool --archive installation",
+    "default_stream_download": "Stopped redundant slow stream after complete range download verified",
+    "anonymous_install_repeat_check": "PASS",
+    "github_identity_used": false,
+    "original_retained_copied": false,
+    "all_five_public_assets_verified": "PASS"
   },
-  "rootfs": "Historical server builder, helpers and package inventory delivered; no public image or reproduced Phosh/XFCE desktop"
+  "rootfs": "Historical server builder, helpers and package inventory delivered; no public image or reproduced Phosh/XFCE desktop",
+  "release_commit": "d08148f0a49ad9c6d2b2da6e0ae69c0432a3000a",
+  "release_url": "https://github.com/Embracecactus/raphael-linux-bringup/releases/tag/boot-inputs-20260924-v1",
+  "release_id": 394838566
 }
