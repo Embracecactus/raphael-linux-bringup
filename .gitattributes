@@ -1,3 +1,6 @@
 # Preserve raw diagnostic output and unified patch context verbatim.
 logs/raphael/*.log -whitespace
 logs/raphael/*.patch -whitespace
+
+# Keep the vendored upstream tree byte-identical, including patch context.
+third_party/raphael-kernel-builder/** -text -whitespace

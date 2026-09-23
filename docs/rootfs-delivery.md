@@ -36,23 +36,27 @@ rootfs 目前交付历史服务器构建脚本、依赖闭包说明与包版本�
 | 输入 | 锁定来源/核验 | 当前边界 |
 | --- | --- | --- |
 | 历史 kernel deb | GavinLiuOnline/xiaomi_raphael_build_kernel 的 kernel-v7.0 Release；SHA-256 `9f1a0ca50c7e0035c0ec8fea84e46dd9e5b04869e3f3506d7aae83ea9d7f230e` | 对应 c526 社区 7.0 内核，不是当前 7.3 fork |
-| kernel builder | commit `128ac1fec88e7a141cebfab4193c6c4cc512a1d1`，tree `ee3e9a20ba8b20b438ff649e4ced707d54611bb1` | 固件、ALSA 目录都被脚本消费；固件再分发授权未闭环 |
+| kernel builder | commit `128ac1fec88e7a141cebfab4193c6c4cc512a1d1`，tree `ee3e9a20ba8b20b438ff649e4ced707d54611bb1` | 完整 613 文件已随仓库提交；固件、ALSA 目录均保留，来源和授权范围见下方说明 |
 | Debian 包 | TUNA Debian / Debian Security，trixie | 保留包版本清单；尚未补全源包/签名快照锁 |
 | GRUB | Debian `2.12-9+deb13u2` ARM64 | 原 EFI、源码与许可随启动安全子集发布 |
 | U-Boot | b5e36b80，单独构建入口 | 不在 rootfs 脚本内构建 |
 
-准备 builder 源码时使用锁定仓库提交的 archive（不要把父仓库误当成它的 Git root）：
+`third_party/raphael-kernel-builder/` 已完整纳入 Git，普通 clone 即可取得，无需额外
+clone 上游或下载子模块。全部 613 文件、163356160 字节与锁定上游 tree 一致，
+包括原配置、补丁、固件、ALSA、文档和嵌套工作流。目录没有自身 `.git` 元数据。
+在本仓库根目录核验：
 
 ```sh
-git clone https://github.com/GavinLiuOnline/xiaomi_raphael_build_kernel.git /tmp/raphael-builder-source
-mkdir -p third_party/raphael-kernel-builder
-git -C /tmp/raphael-builder-source archive 128ac1fec88e7a141cebfab4193c6c4cc512a1d1 \
-  | tar -x -C third_party/raphael-kernel-builder
 bash tools/raphael/verify_git_tree.sh third_party/raphael-kernel-builder ee3e9a20ba8b20b438ff649e4ced707d54611bb1
 ```
 
-上面的解包目录必须是新建空目录；已有原材料请保留，改用独立位置及 `BUILDER_SOURCE`。
-仅取得上游材料不解决其中固件的分发授权问题，不要将其整体上传到自己的 Release。
+完整目录按维护者明确要求提交，且已单独确认允许包含上游 27 个传感器校准文件。
+其中含非零持久化/工厂校准值，不是从本用户手机新提取的数据，也未证明适用于其他手机。
+本次未独立取得厂商许可文件，不把上游材料改为本项目许可证。
+详见 [来源及使用说明](../third_party/raphael-kernel-builder.NOTICE.md)。
+原目录内容、rootfs 脚本的源码树锁和启动输入锁均未修改。
+上游构建脚本含清理、强制恢复及全局 Git 设置，本次没有执行它；当前内核继续使用
+本仓库 `tools/raphael/build_fork_kernel.sh`。
 
 历史脚本还依赖 mmdebstrap、qemu-user-static/binfmt-support、ARM64 chroot、
 Debian archive keyring、dtc、mtools、dosfstools、e2fsprogs、OpenSSH 工具及脚本
@@ -62,7 +66,7 @@ Debian archive keyring、dtc、mtools、dosfstools、e2fsprogs、OpenSSH 工具�
 ```sh
 sudo env SSH_PUBLIC_KEY=/path/to/your-key.pub \
   KERNEL_DEB=/path/to/hash-verified/linux-image-xiaomi-raphael.deb \
-  BUILDER_SOURCE=/path/to/verified-builder-archive \
+  BUILDER_SOURCE="$PWD/third_party/raphael-kernel-builder" \
   OUTPUT_DIR="$PWD/artifacts/build/my-new-server-rootfs" \
   bash tools/raphael/build_debian_trixie_server.sh
 ```

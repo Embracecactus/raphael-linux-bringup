@@ -3,3 +3,4 @@
 raphael-kernel-fork | https://github.com/Embracecactus/linux.git | refs/heads/raphael/dev | 61192118e44cd9618d4b8114f76266df8581d28f | optional-gtx8-polling;build-package-pass;reboot-pass-intree-polling16-taint0-password-login;polling-physical-touch-user-confirmed;irq-unresolved
 linux-upstream-base | https://github.com/torvalds/linux.git | refs/heads/master | 4d7d9486c04d917265f64c55bd23b2cc4fe7749c | verified-fork-and-upstream-ref;tree=5284758ed1191cf5b42c42a0f55c2b2ba9b16b03
 raphael-uboot | https://github.com/GavinLiuOnline/xiaomi_raphael_uboot.git | refs/heads/mailing | b5e36b80ecf58b00f4f4245cf411d73ed36832d5 | pinned-stable-EFI-loader
+raphael-kernel-builder | https://github.com/GavinLiuOnline/xiaomi_raphael_build_kernel.git | archived-commit | 128ac1fec88e7a141cebfab4193c6c4cc512a1d1 | vendored-complete;tree=ee3e9a20ba8b20b438ff649e4ced707d54611bb1;613-files;see=raphael-kernel-builder.NOTICE.md

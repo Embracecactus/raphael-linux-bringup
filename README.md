@@ -36,6 +36,7 @@ bash tools/raphael/flash_fastboot_boot_cache.sh preflight
 | 路径 | 内容 |
 | --- | --- |
 | `linux/` | 独立内核 checkout，父仓库忽略 |
+| `third_party/raphael-kernel-builder/` | 随 Git 提供的完整历史 builder，613 文件；[来源及校准数据说明](third_party/raphael-kernel-builder.NOTICE.md) |
 | `config/raphael/` | 内核提交号、启动输入哈希 |
 | `tools/raphael/` | 构建、下载、打包、部署及历史 rootfs 工具 |
 | `docs/` | 开发说明、RPMh 回归证据、迁移验收 |

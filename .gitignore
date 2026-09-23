@@ -1,6 +1,7 @@
 # Kernel and supporting sources are separate checkouts.
 /linux/
 /third_party/*/
+!/third_party/raphael-kernel-builder/
 
 # Builds, downloads, historical archives and device-private material stay local.
 /artifacts/*
