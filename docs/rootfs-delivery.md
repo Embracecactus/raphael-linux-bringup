@@ -4,6 +4,11 @@
 rootfs 目前交付历史服务器构建脚本、依赖闭包说明与包版本清单，没有交付镜像。**
 四项启动输入本来也不包含 Debian userdata，不能命名为完整 ROM。
 
+已根据 9 月 1–15 日范围内找到的 session，补齐
+[Android 提取、备份、首次安装与恢复流程](android-to-linux-install.md)。
+其中 9 月 3 日原机持久启动 Debian 服务器有实际证据；文档完整不代表干净构建、
+另一台设备首装或完整 Android 回退已验收。
+
 ## 已核对与恢复的材料
 
 从本仓库历史提交 `8146d647067b18c08ee859023816f7ade2c009ae` 恢复：
@@ -71,7 +76,8 @@ sudo env SSH_PUBLIC_KEY=/path/to/your-key.pub \
   bash tools/raphael/build_debian_trixie_server.sh
 ```
 
-这是构建命令，不是首次安装说明。它产生含构建者公钥的个人镜像，不可默认公开。
+这是构建命令，后续安装步骤见[首次安装流程](android-to-linux-install.md)。
+它产生含构建者公钥的个人镜像，不可默认公开。
 新设备生成自己的 SSH host keys，使用自己的用户凭据、公钥与私钥，绝不复制原设备私钥。
 
 ## 基础模板和当前桌面的区别

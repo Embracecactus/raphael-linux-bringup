@@ -4,6 +4,12 @@ Redmi K20 Pro（`raphael`）的 Linux 构建和部署工具。
 内核源码与适配提交维护在 [Embracecactus/linux](https://github.com/Embracecactus/linux)
 的 `raphael/dev` 分支；本仓库负责把该源码构建为可核验的启动包。
 
+**从原 Android 手机开始：**请先读
+[提取、备份、首次安装与恢复完整流程](docs/android-to-linux-install.md)。
+该文依据 9 月 2–5 日的 session 和历史实机记录整理，包含原厂恢复材料、TWRP、
+双份校准备份、自己的 Debian rootfs、分区写入及验收；明确区分历史首装成功
+与尚未验收的干净重建、独立设备安装和 Android 完整回退。
+
 ## 启动输入交付
 
 [固定 Release：boot-inputs-20260924-v1](https://github.com/Embracecactus/raphael-linux-bringup/releases/tag/boot-inputs-20260924-v1)

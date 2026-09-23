@@ -1,5 +1,9 @@
 # Raphael 开发工作流
 
+本文主要面向源码构建及已有 Debian 的内核更新。仍运行 Android 的手机，先阅读
+[从 Android 到 Linux 的提取、备份、首次安装与恢复流程](android-to-linux-install.md)，
+完成自己的数据导出、恢复材料和设备备份；不能直接把 boot/cache 更新入口当成首装工具。
+
 ## 两个仓库
 
 | 仓库 | 职责 |
