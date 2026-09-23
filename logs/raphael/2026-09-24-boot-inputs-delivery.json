@@ -1,0 +1,91 @@
+{
+  "date": "2026-09-24",
+  "base_commit": "81b0b6f26a97bd0db4bc44c98f3bf8a0cb8af1c2",
+  "release_tag": "boot-inputs-20260924-v1",
+  "release_status": "PREPARED_LOCAL_NOT_YET_PUBLISHED",
+  "original_lock_unchanged": true,
+  "packaging_entrypoints_unchanged": true,
+  "fetch_tool_unchanged": true,
+  "assets": [
+    {
+      "name": "BOOT-INPUTS-NOTICE-20260924-v1.md",
+      "bytes": 4953,
+      "sha256": "877b6675aea75b0092e04686fb21e67223e752eb19c677e40a9a15f533000565"
+    },
+    {
+      "name": "SHA256SUMS-20260924-v1",
+      "bytes": 419,
+      "sha256": "fbca60e72478578b508524cab452e7728e452a14f4cb92af164c04899b68a5d1"
+    },
+    {
+      "name": "boot-inputs-files-20260924-v1.json",
+      "bytes": 556,
+      "sha256": "a91eb994dc7af40e41c16fa5eef41153c963d24f95c9806a5747362d88f0d0d4"
+    },
+    {
+      "name": "raphael-boot-inputs-20260924-v1.tar.gz",
+      "bytes": 32152495,
+      "sha256": "dfc52362a5e03fa018857fd22c68bc1c2910d9e9bd677e098b9137d7a92578cb"
+    },
+    {
+      "name": "raphael-initramfs-materials-20260924-v1.tar.gz",
+      "bytes": 234538,
+      "sha256": "92079a124632ed57a68dd778288a205403307d3a52698bff95e4cd54fe19b2a4"
+    }
+  ],
+  "inputs": {
+    "BOOTAA64.EFI": {
+      "bytes": 3551232,
+      "sha256": "e9c9cddcba30163e0f17faba01eb8dbb8fcd073bb9f2ac6d8d4b8c11e84a3992",
+      "regular_file": true,
+      "original_lock_match": true
+    },
+    "control-sm8150-xiaomi-raphael.dtb": {
+      "bytes": 108526,
+      "sha256": "11a69f06a39c0096cf19fec43ba0739bce547f934ec6a834988293918d7ea211",
+      "regular_file": true,
+      "original_lock_match": true
+    },
+    "raphael-uboot-cache.img": {
+      "bytes": 630784,
+      "sha256": "41b90496cf53c47e2bfebf20c28f6c62bbcafae07a023488f75b88a32669db42",
+      "regular_file": true,
+      "original_lock_match": true
+    },
+    "recovery-initramfs-7.1": {
+      "bytes": 30745851,
+      "sha256": "d5f237df4bfd198b6db708afb8b2d49306be90a973bf932a073b2f61b36db139",
+      "regular_file": true,
+      "original_lock_match": true
+    }
+  },
+  "distribution_basis": {
+    "date": "2026-09-24",
+    "basis": "Repository operator confirmed public redistribution rights and authorized publication of the 43 vendor firmware files.",
+    "independent_vendor_grant_verification": false,
+    "notice": "BOOT-INPUTS-NOTICE-20260924-v1.md"
+  },
+  "audit": {
+    "initramfs_entries": 1613,
+    "regular_files": 1302,
+    "vendor_firmware_files": 43,
+    "personal_secret_patterns_detected": false,
+    "vendor_build_path_pattern_occurrences": 4,
+    "debian_packages_identified": 31,
+    "debian_payload_files_matched": 335,
+    "all_userland_elf_components_accounted_for": true,
+    "initramfs_execution": "NONE",
+    "static_scan_not_proof_of_absence": true
+  },
+  "tests": {
+    "security_unittests": "PASS_7_GROUPS",
+    "local_archive_install_repeat_and_check": "PASS_4_OF_4",
+    "anonymous_remote_download_restore": "PENDING_PUBLICATION",
+    "fresh_packaging": "BLOCKED_ORIGINAL_KERNEL_O_DIRECTORY_REMOVED",
+    "existing_bundle_preflight": "PASS_NOT_A_NEW_BUILD",
+    "fresh_host_full_compile": "NOT_RUN",
+    "hardware_boot": "NOT_RUN",
+    "phone_operations": "NONE"
+  },
+  "rootfs": "Historical server builder, helpers and package inventory delivered; no public image or reproduced Phosh/XFCE desktop"
+}

@@ -82,15 +82,16 @@ ARM64 架构、vermagic 和容量。FAT 镜像中的文件须逐字回读一致�
 本地必须保留 `artifacts/retained/raphael-boot-inputs/`，其输入哈希锁在
 [`boot-inputs.lock.json`](../config/raphael/boot-inputs.lock.json)。
 缺失或哈希不符会停止打包；不能从任意旧构建目录自动替代。
-Git clone 本身不含这些二进制。当前固定 Release 提供三项公开安全子集，
-initramfs 因厂商固件授权未确认而暂缓；不能宣称全新主机已可获取完整输入。
+Git clone 本身不含这些二进制。固定 Release `boot-inputs-20260924-v1` 提供四项原始输入；
+无需 GitHub 登录，以下命令下载、校验并恢复到 retained 目录：
 
 ```sh
-python3 tools/raphael/fetch_boot_inputs.py --download-only /tmp/raphael-boot-inputs-public-subset-20260923-v1.tar.gz
-# 自己持有匹配原 initramfs 时，四项全部校验后才安装：
-python3 tools/raphael/fetch_boot_inputs.py --local-input-dir /path/to/your-original-inputs
+python3 tools/raphael/fetch_boot_inputs.py
 python3 tools/raphael/fetch_boot_inputs.py --check
 ```
+
+可用 `--download-only /tmp/raphael-boot-inputs-20260924-v1.tar.gz` 只保存归档，
+随后用 `--archive FILE` 离线安装。两条路径均执行归档及原始逐文件哈希检查。
 
 Release 提供 retained 二进制及对应源码/许可附件；当前内核、模块和候选 DTB
 由锁定的内核源码构建。原 lock 哈希不变，完整说明见 [启动输入交付](boot-inputs-release.md)。

@@ -1,18 +1,19 @@
 {
   "schema_version": 1,
   "repository": "Embracecactus/raphael-linux-bringup",
-  "tag": "boot-inputs-20260923-v1",
-  "status": "partial-firmware-redistribution-blocked",
+  "tag": "boot-inputs-20260924-v1",
+  "status": "complete-four-inputs",
   "lock_file": "config/raphael/boot-inputs.lock.json",
   "archive": {
-    "name": "raphael-boot-inputs-public-subset-20260923-v1.tar.gz",
-    "bytes": 1616437,
-    "sha256": "ec29a6d78eeae5d2d3f8757e933ca5afdfedddf13eab14838f3a3e7ceb6e0674",
-    "url": "https://github.com/Embracecactus/raphael-linux-bringup/releases/download/boot-inputs-20260923-v1/raphael-boot-inputs-public-subset-20260923-v1.tar.gz",
+    "name": "raphael-boot-inputs-20260924-v1.tar.gz",
+    "bytes": 32152495,
+    "sha256": "dfc52362a5e03fa018857fd22c68bc1c2910d9e9bd677e098b9137d7a92578cb",
+    "url": "https://github.com/Embracecactus/raphael-linux-bringup/releases/download/boot-inputs-20260924-v1/raphael-boot-inputs-20260924-v1.tar.gz",
     "inputs": [
       "BOOTAA64.EFI",
       "control-sm8150-xiaomi-raphael.dtb",
-      "raphael-uboot-cache.img"
+      "raphael-uboot-cache.img",
+      "recovery-initramfs-7.1"
     ]
   },
   "corresponding_source": {
@@ -21,7 +22,17 @@
     "sha256": "cf980f3ddfc70147653516da9c6b6743b83bbd8348f8de42fdf5f3c0c2b93ab2",
     "url": "https://github.com/Embracecactus/raphael-linux-bringup/releases/download/boot-inputs-20260923-v1/raphael-boot-inputs-sources-20260923-v1.tar.gz"
   },
-  "withheld": {
-    "recovery-initramfs-7.1": "No redistribution grant found for the 43 included vendor firmware files; do not upload or alter the original."
-  }
+  "initramfs_materials": {
+    "name": "raphael-initramfs-materials-20260924-v1.tar.gz",
+    "bytes": 234538,
+    "sha256": "92079a124632ed57a68dd778288a205403307d3a52698bff95e4cd54fe19b2a4",
+    "url": "https://github.com/Embracecactus/raphael-linux-bringup/releases/download/boot-inputs-20260924-v1/raphael-initramfs-materials-20260924-v1.tar.gz"
+  },
+  "firmware_distribution_basis": {
+    "date": "2026-09-24",
+    "basis": "Repository operator confirmed public redistribution rights and authorized publication of the 43 vendor firmware files.",
+    "independent_vendor_grant_verification": false,
+    "notice": "BOOT-INPUTS-NOTICE-20260924-v1.md"
+  },
+  "withheld": {}
 }

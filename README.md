@@ -6,17 +6,18 @@ Redmi K20 Pro（`raphael`）的 Linux 构建和部署工具。
 
 ## 启动输入交付
 
-[固定 Release：boot-inputs-20260923-v1](https://github.com/Embracecactus/raphael-linux-bringup/releases/tag/boot-inputs-20260923-v1)
-公开 **U-Boot、GRUB EFI、历史控制 DTB 三项安全子集**及对应源码/许可证。
-原 initramfs 含分发授权未确认的厂商固件，暂不上传；全新克隆尚不能仅靠 Release
-凑齐四项输入，更不能据此首次安装新手机。没有 userdata，不是完整稳定 ROM。
+[固定 Release：boot-inputs-20260924-v1](https://github.com/Embracecactus/raphael-linux-bringup/releases/tag/boot-inputs-20260924-v1)
+提供 **原始恢复 initramfs、U-Boot、GRUB EFI、历史控制 DTB 四项启动输入**。
+厂商固件按仓库维护者确认的公开再分发权发布，详细依据及源码获取说明见下方文档。
+没有 userdata，不是完整稳定 ROM，不能仅凭本包首次安装新手机。
 
 ```sh
-python3 tools/raphael/fetch_boot_inputs.py --download-only /tmp/raphael-boot-inputs-public-subset-20260923-v1.tar.gz
-# 自己已合法持有原始、锁定哈希匹配的 initramfs 时：
-python3 tools/raphael/fetch_boot_inputs.py --local-input-dir /path/to/your-original-inputs
+python3 tools/raphael/fetch_boot_inputs.py
 python3 tools/raphael/fetch_boot_inputs.py --check
 ```
+
+下载后四项均恢复到 `artifacts/retained/raphael-boot-inputs/`，大小与 SHA-256
+必须匹配原锁。无需 GitHub 登录；已有不匹配文件会停止，不覆盖。
 
 [输入核验、下载与限制](docs/boot-inputs-release.md) ·
 [rootfs 构建材料与缺口](docs/rootfs-delivery.md)。
