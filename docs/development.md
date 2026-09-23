@@ -23,6 +23,8 @@
 ```sh
 git clone --filter=blob:none --single-branch --branch raphael/dev \
   https://github.com/Embracecactus/linux.git linux
+# 首次克隆后固定到本仓库 manifest 对应的完整提交：
+git -C linux checkout --detach "$(python3 -c 'import json; print(json.load(open("config/raphael/kernel-source.lock.json"))["commit"])')"
 git -C linux remote add upstream https://github.com/torvalds/linux.git
 git -C linux fetch --no-tags upstream master
 git -C linux branch master upstream/master
@@ -38,7 +40,22 @@ git -C linux branch master upstream/master
 
 主机需要 GCC ARM64 交叉工具链、make、bison、flex、OpenSSL/ELF 开发库、
 dtc、mtools、dosfstools、cpio、gzip、kmod 和 initramfs-tools。
-本轮使用 `aarch64-linux-gnu-gcc 11.4.0`。
+历史构建使用 `aarch64-linux-gnu-gcc 11.4.0`。Debian/Ubuntu 主机可先安装：
+
+```sh
+sudo apt-get update
+sudo apt-get install python3 build-essential gcc-aarch64-linux-gnu bison flex \
+  libssl-dev libelf-dev bc rsync device-tree-compiler mtools dosfstools \
+  cpio gzip kmod initramfs-tools file fastboot
+```
+
+全新克隆没有本机 Platform Tools，主机预检显式使用已安装的 Fastboot 路径：
+
+```sh
+FASTBOOT="$(command -v fastboot)" bash tools/raphael/flash_fastboot_boot_cache.sh preflight
+```
+
+该调用仅校验本地包；软件安装和完整内核编译未在本次隔离下载验证中执行。
 
 ```sh
 JOBS=16 bash tools/raphael/build_fork_kernel.sh

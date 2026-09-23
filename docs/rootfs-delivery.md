@@ -73,7 +73,7 @@ sudo env SSH_PUBLIC_KEY=/path/to/your-key.pub \
 ## 基础模板和当前桌面的区别
 
 本机保留 `artifacts/retained/debian13-base/raphael-userdata-rootfs.img`，
-1138638848 字节，历史构建清单 hash 为
+1138638848 字节，本轮只读重新计算与历史构建清单一致，hash 为
 `b6f55322aac6edd088a2dcce395c66a6f102da299d2d1a5f52ae537b026e94ac`。
 只读 debugfs 检查发现 `/home/raphael/.ssh/authorized_keys`（103 字节），
 因此它不是无个人身份的公开基础模板。未输出密钥正文，没有修改或上传镜像。

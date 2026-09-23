@@ -1,0 +1,115 @@
+{
+  "date": "2026-09-23",
+  "repository": "Embracecactus/raphael-linux-bringup",
+  "base_commit": "ecd65b726b725dfa310fef513a7e6fa5f6cdb2f7",
+  "release_commit": "e07bcc32512dcb944e0a2933c004581408c6e635",
+  "release_tag": "boot-inputs-20260923-v1",
+  "release_url": "https://github.com/Embracecactus/raphael-linux-bringup/releases/tag/boot-inputs-20260923-v1",
+  "release_status": "published-prerelease-partial-3-of-4",
+  "original_lock_unchanged": true,
+  "packaging_entrypoints_unchanged": true,
+  "local_input_checks": {
+    "recovery-initramfs-7.1": {
+      "regular_file": true,
+      "bytes": 30745851,
+      "sha256": "d5f237df4bfd198b6db708afb8b2d49306be90a973bf932a073b2f61b36db139",
+      "original_lock_match": true,
+      "public": false
+    },
+    "control-sm8150-xiaomi-raphael.dtb": {
+      "regular_file": true,
+      "bytes": 108526,
+      "sha256": "11a69f06a39c0096cf19fec43ba0739bce547f934ec6a834988293918d7ea211",
+      "original_lock_match": true,
+      "public": true
+    },
+    "raphael-uboot-cache.img": {
+      "regular_file": true,
+      "bytes": 630784,
+      "sha256": "41b90496cf53c47e2bfebf20c28f6c62bbcafae07a023488f75b88a32669db42",
+      "original_lock_match": true,
+      "public": true
+    },
+    "BOOTAA64.EFI": {
+      "regular_file": true,
+      "bytes": 3551232,
+      "sha256": "e9c9cddcba30163e0f17faba01eb8dbb8fcd073bb9f2ac6d8d4b8c11e84a3992",
+      "original_lock_match": true,
+      "public": true
+    }
+  },
+  "assets": [
+    {
+      "name": "BOOT-INPUTS-NOTICE-20260923-v1.md",
+      "bytes": 4466,
+      "sha256": "3cfb3523738215bf1710007c5f413d49a04e1939978c73b35350593c4e7672b8",
+      "github_asset_digest_match": true
+    },
+    {
+      "name": "SHA256SUMS-20260923-v1",
+      "bytes": 433,
+      "sha256": "291a26430f2a1f8d1a3266b166e4f5588b2e9e0760371cdc380bc115abc6fefc",
+      "github_asset_digest_match": true
+    },
+    {
+      "name": "boot-inputs-files-20260923-v1.json",
+      "bytes": 637,
+      "sha256": "7df4f452c388ab81e2170e3ca5b27545b44ebab43d86cde79493bcc6650b1e5f",
+      "github_asset_digest_match": true
+    },
+    {
+      "name": "raphael-boot-inputs-public-subset-20260923-v1.tar.gz",
+      "bytes": 1616437,
+      "sha256": "ec29a6d78eeae5d2d3f8757e933ca5afdfedddf13eab14838f3a3e7ceb6e0674",
+      "github_asset_digest_match": true
+    },
+    {
+      "name": "raphael-boot-inputs-sources-20260923-v1.tar.gz",
+      "bytes": 53699760,
+      "sha256": "cf980f3ddfc70147653516da9c6b6743b83bbd8348f8de42fdf5f3c0c2b93ab2",
+      "github_asset_digest_match": true
+    }
+  ],
+  "audit": {
+    "initramfs_entries": 1613,
+    "initramfs_regular_files": 1302,
+    "firmware_files": 43,
+    "firmware_content_matches_historical_builder": 43,
+    "firmware_redistribution_grant": "NOT_FOUND_BLOCKS_INITRAMFS_PUBLICATION",
+    "initramfs_execution": "NONE",
+    "common_secret_pattern_scan": "no personal credential detected; static scan is not proof of absence",
+    "uboot_manifest_payload_and_dtb_match": true,
+    "grub_official_debian_module_matches": 230,
+    "control_dtb_source_reproduction": "PASS_BYTE_IDENTICAL_CPP_DTC_ONLY"
+  },
+  "tests": {
+    "security_unittests": 7,
+    "security_unittests_status": "PASS",
+    "local_archive_restore_with_private_original_initramfs": "PASS_4_OF_4_HOST_ONLY_NOT_ANONYMOUS_DOWNLOAD",
+    "anonymous_remote_tag_clone": "PASS",
+    "anonymous_public_data_download_via_new_tool": "PASS",
+    "anonymous_public_data_lock_checks": "PASS_3_OF_4",
+    "original_retained_copied_to_anonymous_clone": false,
+    "github_identity_used_for_public_clone_and_data_download": false,
+    "anonymous_full_four_input_restore": "BLOCKED_WITHHELD_INITRAMFS_NO_PARTIAL_INSTALL",
+    "fresh_host_full_compile": "NOT_RUN",
+    "fresh_packaging": "BLOCKED_ORIGINAL_KERNEL_O_DIRECTORY_REMOVED",
+    "existing_bundle_preflight": "PASS_NOT_A_NEW_BUILD",
+    "hardware_boot": "NOT_RUN",
+    "phone_operations": "NONE",
+    "anonymous_auxiliary_asset_download": "NOT_COMPLETED_TLS_EOF; all five uploaded sizes/digests verified using GitHub API"
+  },
+  "rootfs": {
+    "restored_builder_and_helpers": 5,
+    "restored_helper_bytes_match_historical_commit": true,
+    "builder_change": "explicit user-supplied public SSH key; no private-key reuse or generation",
+    "builder_source_tree_check": "ee3e9a20ba8b20b438ff649e4ced707d54611bb1",
+    "package_inventory_count": 222,
+    "rootfs_rebuild": "NOT_RUN",
+    "public_rootfs_image": "NONE",
+    "retained_base_image_hash_matches_manifest": true,
+    "retained_base_has_individual_authorized_keys": true,
+    "clean_public_template": "NOT_ESTABLISHED",
+    "desktop_recipe": "NOT_REPRODUCED_FROM_SERVER_RECIPE"
+  }
+}

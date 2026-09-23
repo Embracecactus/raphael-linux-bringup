@@ -109,7 +109,17 @@ BUNDLE="$PWD/artifacts/build/my-new-boot-bundle" bash tools/raphael/flash_fastbo
 - 全新主机完整编译：NOT_RUN。
 - 本轮复用产物重新打包：BLOCKED，完整 O 目录已删除。
 - 本轮手机刷写/启动：`hardware_boot=NOT_RUN`。
-- 公开下载与恢复验证：发布后另记，不能用本地 retained 拷贝代替。
+- 公开下载：PASS。禁用 Git 配置/凭据助手/GitHub 身份环境，从远端重新克隆固定标签
+  `e07bcc32512dcb944e0a2933c004581408c6e635`，用新工具匿名下载公开归档，
+  三项内容逐字匹配该克隆中的原锁。没有复制本机 retained 输入。
+- 完整四项匿名恢复：BLOCKED。未公开 initramfs，默认命令退出 1，且未创建 retained
+  安装目录。完整安装逻辑只在本机原输入与安全归档组合下通过，不能冒称四项匿名下载通过。
+- 五项 Release 附件上传后服务端大小与 SHA-256 均通过核验，随后草稿公开为 prerelease。
+  附加源码/声明附件的补充匿名下载遇到 TLS EOF，有限重试后仍未完成；不将服务端
+  digest 核验写成它们全部经过匿名下载。必需的公开三文件数据包已由新工具匿名下载通过。
+- 下载工具 7 组安全回归测试通过；rootfs 脚本/辅助文件语法与 builder tree 校验通过。
+
+公开结果见 [结构化验收记录](../logs/raphael/2026-09-23-boot-inputs-delivery.json)。
 
 历史实机范围与触摸轮询、软件重启、音频/相机等缺口仍以 README 链接的具体日期
 记录为准；本轮没有增加实机验收结论。
